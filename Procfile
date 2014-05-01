@@ -1,1 +1,1 @@
-java -cp target/classes:"target/dependency/*" mhewedy.usingspark.App
+web:    java -cp target/classes:"target/dependency/*" mhewedy.usingspark.App
