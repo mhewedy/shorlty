@@ -17,6 +17,8 @@ public class App {
 	static Map<String, String> shortenUrlMap = new HashMap<>();
 
 	public static void main(String[] args) {
+		Spark.setPort(Integer.parseInt(System.getenv("PORT")));
+
 		new GeneratorThread().start();
 		Spark.staticFileLocation("web");
 
