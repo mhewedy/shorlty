@@ -11,7 +11,7 @@ public class UniqueSeqGenerator {
 	// "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHUJKLMNOPQRSTUVWXYZ";
 
 	// I'll use this for dev, it generates 26^5 unique string
-	private static String CHARS = "abcdefghijklmnopqrstuvwxyz";
+	private static String CHARS = "0123456789";
 	private static int[] counter = new int[5];
 
 	private static final List<String> UNIQUE_SEQ = new ArrayList<>();
