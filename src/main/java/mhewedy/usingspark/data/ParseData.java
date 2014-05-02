@@ -7,14 +7,20 @@ import java.util.stream.Collectors;
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
+import org.parse4j.callback.FindCallback;
 import org.parse4j.callback.SaveCallback;
 
 public class ParseData implements Data {
 
 	private static final String URL_MAPPING_CLASS = "URLMapping";
+	private static final String HIT_DETAILS_CLASS = "HitDetails";
+
 	private static final String SHORT_URL_COL = "shortUrl";
 	private static final String ORIG_URL_COL = "originalUrl";
 	private static final String IP_COL = "ip";
+
+	private static final String HIT_COUNT_COL = "hitCount";
+	private static final String URL_REL_COL = "urlObj";
 
 	@Override
 	public void saveURL(String shortUrl, String originalUrl, String clientIp) {
@@ -72,5 +78,27 @@ public class ParseData implements Data {
 			System.err.println("cannot restore Parse.com records!");
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static void registerUrlHits(String shortUrl, String ip) {
+
+		ParseQuery<ParseObject> query = ParseQuery.getQuery(URL_MAPPING_CLASS).whereEqualTo(SHORT_URL_COL, shortUrl);
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> list, ParseException parseException) {
+
+				if (parseException == null && list != null) {
+					ParseObject parseObject = list.get(0);
+
+					ParseObject hitsObj = new ParseObject(HIT_DETAILS_CLASS);
+					hitsObj.put(IP_COL, ip);
+					hitsObj.put(URL_REL_COL, parseObject);
+					hitsObj.saveInBackground();
+
+					parseObject.increment(HIT_COUNT_COL);
+					parseObject.saveInBackground();
+				}
+			}
+		});
 	}
 }

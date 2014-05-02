@@ -51,6 +51,7 @@ public class URLHandler {
 		return viewRoute.modelAndView(null, "welcome.ftl");
 	}
 
+	// save hits into db
 	public static String handleURLRedirector(Request request, Response response) {
 		System.out.println("GET /:shortUrl");
 		String shortUrl = request.params("shortUrl");
@@ -58,6 +59,7 @@ public class URLHandler {
 		if (shortUrl != null) {
 			String originalUrl = Data.getOriginalURL(new Data[] { inMemoryData, parseData }, shortUrl);
 			if (originalUrl != null) {
+				ParseData.registerUrlHits(shortUrl, request.ip());
 				System.out.println("redirect to: " + originalUrl);
 				response.redirect(originalUrl);
 			} else {
