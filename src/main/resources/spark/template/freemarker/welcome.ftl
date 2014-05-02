@@ -30,7 +30,7 @@
 					</table>
 				</form></td>
 			<td align="right" style="width: 50%;"><b> UnShorten</b>
-			<p>You can put the shorten url from any service (ex. tinyurl.com or bitly.com) to see the original url before open.</p>
+			<p>You can put the shorten url from any service (ex. <b>tinyurl.com</b> or <b>bitly.com</b>) to see the original url before open.</p>
 				<form method="post" action="/unshorten">
 					<table>
 						<tr>
