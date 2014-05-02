@@ -1,6 +1,8 @@
-package mhewedy.usingspark;
+package mhewedy.usingspark.data;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class UniqueSeqGenerator {
@@ -9,9 +11,8 @@ public class UniqueSeqGenerator {
 	// but it provides 62^5
 	// private static String CHARS =
 	// "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHUJKLMNOPQRSTUVWXYZ";
+	private static String CHARS = "1001";
 
-	// I'll use this for dev, it generates 26^5 unique string
-	private static String CHARS = "0123456789";
 	private static int[] counter = new int[5];
 
 	private static final List<String> UNIQUE_SEQ = new ArrayList<>();
@@ -48,10 +49,17 @@ public class UniqueSeqGenerator {
 	}
 
 	public synchronized static String next() {
-		return UNIQUE_SEQ.get(nextIndex++);
+		String ustring = null;
+		while (InMemoryData.contains(ustring = base64(UNIQUE_SEQ.get(nextIndex++))))
+			;
+		return ustring;
 	}
 
-	static class GeneratorThread extends Thread {
+	private static String base64(String no) {
+		return Base64.getEncoder().encodeToString(no.getBytes(StandardCharsets.UTF_8));
+	}
+
+	public static class GeneratorThread extends Thread {
 		@Override
 		public void run() {
 			getNextValue();

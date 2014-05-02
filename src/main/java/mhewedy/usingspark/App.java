@@ -1,63 +1,72 @@
 package mhewedy.usingspark;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
+import mhewedy.usingspark.data.ParseData;
+import mhewedy.usingspark.data.UniqueSeqGenerator.GeneratorThread;
 
-import mhewedy.usingspark.UniqueSeqGenerator.GeneratorThread;
+import org.parse4j.Parse;
+
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.Spark;
-
+import spark.template.freemarker.FreeMarkerRoute;
 
 public class App {
 
-	static Map<String, String> shortenUrlMap = new HashMap<>();
-
 	public static void main(String[] args) {
+
+		init();
+
+		Spark.post(new FreeMarkerRoute("/shorten") {
+			@Override
+			public ModelAndView handle(Request request, Response response) {
+				return URLHandler.handlePOSTShorten(request, response, this);
+			}
+		});
+
+		Spark.post(new FreeMarkerRoute("/unshorten") {
+
+			@Override
+			public ModelAndView handle(Request request, Response response) {
+				return URLHandler.handlePOSTUnShorten(request, response, this);
+			}
+		});
+
+		Spark.get(new Route("/shorten") {
+			@Override
+			public Object handle(Request request, Response response) {
+				return URLHandler.redirectToHome(response);
+			}
+		});
+
+		Spark.get(new Route("/unshorten") {
+			@Override
+			public Object handle(Request request, Response response) {
+				return URLHandler.redirectToHome(response);
+			}
+		});
+
+		Spark.get(new Route("/:shortUrl") {
+			@Override
+			public Object handle(Request request, Response response) {
+				return URLHandler.handleURLRedirector(request, response);
+			}
+		});
+
+		Spark.get(new FreeMarkerRoute("/") {
+			@Override
+			public ModelAndView handle(Request request, Response response) {
+				return URLHandler.handleHome(this);
+			}
+		});
+	}
+
+	private static void init() {
 		Spark.setPort(Integer.parseInt(System.getenv("PORT")));
-
+		Parse.initialize("S0ryVHKLgL3MII7OmnIRSvzQkCkAAMtvc6BrCKQS", "iG1oZ8OTNBpIJeLzOz6Oj8sS4y5c2J6Pbd6hEsH2");
 		new GeneratorThread().start();
+		ParseData.copyToMemory();
 		Spark.staticFileLocation("web");
-
-		Spark.post(new Route("/shorten") {
-			@Override
-			public Object handle(Request request, Response response) {
-				String url = request.queryParams("url");
-				String shortUrl = Base64.getEncoder().encodeToString(
-						UniqueSeqGenerator.next().getBytes(StandardCharsets.UTF_8));
-				shortenUrlMap.put(shortUrl, url);
-				return request.scheme() + "://" + request.host() + "/" + shortUrl;
-			}
-		});
-
-		Spark.get(new Route("/:url") {
-			@Override
-			public Object handle(Request request, Response response) {
-				String shortUrl = request.params("url"); 
-				if (shortUrl != null) {
-					String originalUrl = shortenUrlMap.get(shortUrl);
-					if (originalUrl != null) {
-						System.out.println("redirect to: " + originalUrl);
-						response.redirect(originalUrl);
-					} else {
-						System.err.printf("short url %s not found!", shortUrl);
-					}
-				} else {
-					System.err.println("shortenUrl is null");
-				}
-				return "";
-			}
-		});
-
-		Spark.get(new Route("/") {
-			@Override
-			public Object handle(Request request, Response response) {
-				response.redirect("/pages/welcome.html");
-				return "";
-			}
-		});
 	}
 }
