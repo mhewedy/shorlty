@@ -11,7 +11,7 @@ public class UniqueSeqGenerator {
 	// but it provides 62^5
 	// private static String CHARS =
 	// "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHUJKLMNOPQRSTUVWXYZ";
-	private static String CHARS = "abcdefghijklmnopqrst";
+	private static String CHARS = "abcdefghijklmnopqr";
 
 	private static int[] counter = new int[5];
 
