@@ -8,7 +8,7 @@
 	Welcome to shorten url service
 
 	<table border="1"
-		style="vertical-align: middle; width: 60%; border: medium;">
+		style="vertical-align: middle; width: 90%; border: medium;">
 		<tr>
 			<td align="left"><b> Shorten</b>
 				<form method="post" action="/shorten">
@@ -29,7 +29,8 @@
 						</#if>
 					</table>
 				</form></td>
-			<td align="right"><b> UnShorten</b>
+			<td align="right" style="width: 50%;"><b> UnShorten</b>
+			<p>You can put the shorten url from any service (ex. tinyurl.com or bitly.com) to see the original url before open.</p>
 				<form method="post" action="/unshorten">
 					<table>
 						<tr>
