@@ -25,8 +25,4 @@ public class InMemoryData implements Data {
 	public static void copyFrom(Map<String, String> map) {
 		shortenUrlMap.putAll(map);
 	}
-
-	static boolean contains(String key) {
-		return shortenUrlMap.keySet().contains(key);
-	}
 }

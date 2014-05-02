@@ -1,7 +1,7 @@
 package mhewedy.usingspark.service;
 
+import mhewedy.usingspark.data.Base64Ops;
 import mhewedy.usingspark.data.Data;
-import mhewedy.usingspark.data.UniqueSeqGenerator;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -15,7 +15,7 @@ public class ShortenService extends ModelAndViewService {
 		String url = request.queryParams("url");
 
 		if (url != null && !url.isEmpty()) {
-			String shortUrl = UniqueSeqGenerator.next();
+			String shortUrl = Base64Ops.increment();
 
 			Data.saveURL(new Data[] { inMemoryData, parseData }, shortUrl, url, request.ip());
 

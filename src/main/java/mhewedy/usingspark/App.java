@@ -1,7 +1,6 @@
 package mhewedy.usingspark;
 
-import mhewedy.usingspark.data.ParseData;
-import mhewedy.usingspark.data.UniqueSeqGenerator.GeneratorThread;
+import mhewedy.usingspark.data.DataBootstraper;
 
 import org.parse4j.Parse;
 
@@ -65,8 +64,7 @@ public class App {
 	private static void init() {
 		Spark.setPort(Integer.parseInt(System.getenv("PORT")));
 		Parse.initialize("S0ryVHKLgL3MII7OmnIRSvzQkCkAAMtvc6BrCKQS", "iG1oZ8OTNBpIJeLzOz6Oj8sS4y5c2J6Pbd6hEsH2");
-		new GeneratorThread().start();
-		ParseData.copyToMemory();
+		DataBootstraper.bootstrap();
 		Spark.staticFileLocation("web");
 	}
 }
