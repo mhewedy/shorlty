@@ -51,7 +51,7 @@
 				</form></td>
 		</tr>
 	</table>
-	By <a href="http://m-hewedy.blogspot.com">mhewedy</a> 
+	<a href="apidoc">API</a> | <a href="https://github.com/MuhammadHewedy/short-url"> source code</a> |By <a href="http://m-hewedy.blogspot.com">mhewedy</a> 
 
 
 </body>

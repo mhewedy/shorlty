@@ -1,6 +1,12 @@
 package mhewedy.usingspark;
 
 import mhewedy.usingspark.data.DataBootstraper;
+import mhewedy.usingspark.service.ApiDocService;
+import mhewedy.usingspark.service.ApiShortenService;
+import mhewedy.usingspark.service.HomeService;
+import mhewedy.usingspark.service.ShortenService;
+import mhewedy.usingspark.service.URLResolveService;
+import mhewedy.usingspark.service.UnShortenService;
 
 import org.parse4j.Parse;
 
@@ -20,43 +26,58 @@ public class App {
 		Spark.post(new FreeMarkerRoute("/shorten") {
 			@Override
 			public ModelAndView handle(Request request, Response response) {
-				return URLHandler.handlePOSTShorten(request, response, this);
+				return new ShortenService().doService(request, response, this);
 			}
 		});
 
 		Spark.post(new FreeMarkerRoute("/unshorten") {
-
 			@Override
 			public ModelAndView handle(Request request, Response response) {
-				return URLHandler.handlePOSTUnShorten(request, response, this);
+				return new UnShortenService().doService(request, response, this);
 			}
 		});
 
 		Spark.get(new Route("/shorten") {
 			@Override
 			public Object handle(Request request, Response response) {
-				return URLHandler.redirectToHome(response);
+				response.redirect("/");
+				return "";
 			}
 		});
 
 		Spark.get(new Route("/unshorten") {
 			@Override
 			public Object handle(Request request, Response response) {
-				return URLHandler.redirectToHome(response);
+				response.redirect("/");
+				return "";
+			}
+		});
+
+		Spark.get(new FreeMarkerRoute("/apidoc") {
+			@Override
+			public ModelAndView handle(Request request, Response response) {
+				return new ApiDocService().doService(request, response, this);
+			}
+		});
+
+		Spark.get(new Route("/api/shorten") {
+			@Override
+			public Object handle(Request request, Response response) {
+				return new ApiShortenService().doService(request, response);
 			}
 		});
 
 		Spark.get(new Route("/:shortUrl") {
 			@Override
 			public Object handle(Request request, Response response) {
-				return URLHandler.handleURLRedirector(request, response);
+				return new URLResolveService().doService(request, response);
 			}
 		});
 
 		Spark.get(new FreeMarkerRoute("/") {
 			@Override
 			public ModelAndView handle(Request request, Response response) {
-				return URLHandler.handleHome(this);
+				return new HomeService().doService(null, null, this);
 			}
 		});
 	}
