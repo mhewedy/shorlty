@@ -5,7 +5,7 @@
 <title>Welcome!</title>
 </head>
 <body style="">
-	Welcome to shorten url service
+	Welcome to shorten url service (beta)
 
 	<table border="1"
 		style="vertical-align: middle; width: 90%; border: medium;">
