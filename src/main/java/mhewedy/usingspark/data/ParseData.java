@@ -7,6 +7,8 @@ import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 import org.parse4j.callback.SaveCallback;
 
+// TODO: should completely encapsulate Parse.com APIs, so if need change the datastore, it should be pretty simple,
+// so instead of PraseData it should be PersistedData
 public class ParseData implements Data {
 
 	@Override
