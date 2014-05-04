@@ -8,7 +8,7 @@ public class Base64Ops {
 
 	private static String currentVal = "";
 
-	public static String increment() {
+	public static synchronized String increment() {
 		if (currentVal == "") {
 			currentVal = String.valueOf(allChars.charAt(0));
 		} else {
