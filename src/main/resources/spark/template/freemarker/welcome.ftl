@@ -45,7 +45,8 @@
 							</tr>
 						</#if>
 					</table>
-					<em align="left" style="font-size: 10pt;">You can put the shorten url from any service (ex. <b>tinyurl.com</b> or <b>bitly.com</b>) to see the original url before open.</em>
+					<em align="left" style="font-size: 10pt;">You can put the shorten url from any service 
+						(ex. <b>tinyurl.com</b> or <b>bitly.com</b>) to see the original url before open.</em>
 				</form></td>
 		</tr>
 	</table>
@@ -57,8 +58,11 @@
 		<br />
 	</div>
 	
-	<a href="apidoc">API</a> | <a href="https://github.com/MuhammadHewedy/short-url"> source code</a> |By <a href="http://m-hewedy.blogspot.com">mhewedy</a> 
-
+	<a href="apidoc" target="_blank">API</a>
+	 | <a href="ddl/ShortUrl.crx" target="_blank"> <img src="imgs/chrome_icon.png" style="width: 16px; height:16px;" /> Chrome app</a> 
+	 		<em>(<a href="html/install_chrome.html" target="_blank">install</a>)</em> 
+	 | <a href="https://github.com/MuhammadHewedy/short-url" target="_blank"> source code</a> 
+	 | By <a href="http://m-hewedy.blogspot.com" target="_blank">mhewedy</a> 
 
 </body>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
