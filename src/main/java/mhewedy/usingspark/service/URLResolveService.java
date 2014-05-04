@@ -59,6 +59,8 @@ public class URLResolveService extends Service {
 						parseObject.increment(Columns.HIT_COUNT_COL);
 						parseObject.save();
 
+						System.out.printf("success::: save shortUrl %s\n", shortUrl);
+
 					} catch (ParseException e) {
 						System.err.println(e.getMessage());
 					}
