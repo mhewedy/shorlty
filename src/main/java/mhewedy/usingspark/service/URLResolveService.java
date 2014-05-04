@@ -13,8 +13,6 @@ import org.parse4j.callback.FindCallback;
 import spark.Request;
 import spark.Response;
 
-import com.google.gson.Gson;
-
 public class URLResolveService extends Service {
 
 	@Override
@@ -53,8 +51,6 @@ public class URLResolveService extends Service {
 					try {
 						ParseObject parseObject = list.get(0);
 
-						System.out.println("parseObject: " + new Gson().toJson(parseObject));
-
 						ParseObject hitsObj = new ParseObject(Columns.HIT_DETAILS_CLASS);
 						hitsObj.put(Columns.IP_COL, ip);
 						hitsObj.put(Columns.URL_REL_COL, parseObject);
@@ -62,10 +58,6 @@ public class URLResolveService extends Service {
 
 						parseObject.increment(Columns.HIT_COUNT_COL);
 						parseObject.save();
-
-						System.out.printf("success::: save shortUrl %s > parseobject (after save)::: %s\n", shortUrl,
-								new Gson().toJson(parseObject));
-
 					} catch (ParseException e) {
 						System.err.println(e.getMessage());
 					}
