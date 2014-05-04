@@ -40,14 +40,15 @@ public class URLResolveService extends Service {
 	}
 
 	void saveUrlHitsAsync(String shortUrl, String ip) {
+		System.out.printf("save shortUrl %s\n", shortUrl);
 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Columns.URL_MAPPING_CLASS).whereEqualTo(
 				Columns.SHORT_URL_COL, shortUrl);
 		query.findInBackground(new FindCallback<ParseObject>() {
 			@Override
 			public void done(List<ParseObject> list, ParseException parseException) {
-
 				if (parseException == null && list != null) {
+					System.out.printf("success save shortUrl %s\n", shortUrl);
 					ParseObject parseObject = list.get(0);
 
 					ParseObject hitsObj = new ParseObject(Columns.HIT_DETAILS_CLASS);
@@ -58,6 +59,7 @@ public class URLResolveService extends Service {
 					parseObject.increment(Columns.HIT_COUNT_COL);
 					parseObject.saveInBackground();
 				} else {
+					System.out.printf("fail save shortUrl %s\n", shortUrl);
 					System.err.println("ex?: " + parseException);
 				}
 			}

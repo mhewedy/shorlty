@@ -19,8 +19,6 @@ public class DataBootstraper {
 			List<ParseObject> list = query.find();
 
 			if (list != null && !list.isEmpty()) {
-				// XXX BUG here, some times, not the latest record returned,
-				// which leads to duplicate!
 				Base64Ops.resotreCurrentVal(list.get(0).getString(Columns.SHORT_URL_COL));
 
 				copyData(list);
