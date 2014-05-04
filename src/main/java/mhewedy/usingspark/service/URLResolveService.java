@@ -64,7 +64,7 @@ public class URLResolveService extends Service {
 						parseObject.save();
 
 						System.out.printf("success::: save shortUrl %s > parseobject (after save)::: %s\n", shortUrl,
-								parseObject);
+								new Gson().toJson(parseObject));
 
 					} catch (ParseException e) {
 						System.err.println(e.getMessage());
