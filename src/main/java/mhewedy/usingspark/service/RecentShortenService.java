@@ -45,7 +45,7 @@ public class RecentShortenService extends Service {
 		try {
 			ParseQuery<ParseObject> query = ParseQuery.getQuery(Columns.URL_MAPPING_CLASS)
 					.whereEqualTo(Columns.OWNER_ID_COL, cookie).orderByDescending(Columns.CREATED_AT);
-			query.limit(15);
+			query.limit(20);
 			list = query.find();
 		} catch (ParseException e) {
 			System.err.println(e.getMessage());
