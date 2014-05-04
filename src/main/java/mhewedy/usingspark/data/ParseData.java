@@ -12,18 +12,19 @@ import org.parse4j.callback.SaveCallback;
 public class ParseData implements Data {
 
 	@Override
-	public void saveURL(String shortUrl, String originalUrl, String clientIp) {
+	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie) {
 
 		ParseObject parseObject = new ParseObject(Columns.URL_MAPPING_CLASS);
 		parseObject.put(Columns.SHORT_URL_COL, shortUrl);
 		parseObject.put(Columns.ORIG_URL_COL, originalUrl);
 		parseObject.put(Columns.IP_COL, clientIp);
+		parseObject.put(Columns.OWNER_ID_COL, cookie);
 		parseObject.saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException parseException) {
 				if (parseException != null) {
-					System.out.printf("error saving original %s short %s in Parse.com: %s\n", originalUrl, shortUrl,
-							parseException.getMessage());
+					System.err.printf("fetal error saving original %s short %s in Parse.com: %s\n", originalUrl,
+							shortUrl, parseException.getMessage());
 				}
 			}
 		});

@@ -10,7 +10,7 @@ public class ApiShortenService extends ShortenService {
 		System.out.println("GET /api/shorten");
 		response.type("application/json");
 
-		String shortUrl = shortenUrl(request);
+		String shortUrl = shortenUrl(request, response);
 		if (shortUrl != null && !shortUrl.isEmpty()) {
 			return jsonResponse(shortUrl);
 		}

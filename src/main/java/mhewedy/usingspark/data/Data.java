@@ -7,13 +7,13 @@ public interface Data {
 
 	int getPriority();
 
-	void saveURL(String shortUrl, String originalUrl, String clientIp);
+	void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie);
 
 	String getOriginalURL(String shortUrl);
 
-	static void saveURL(Data[] dataArray, String shortUrl, String originalUrl, String clientIp) {
+	static void saveURL(Data[] dataArray, String shortUrl, String originalUrl, String clientIp, String cookie) {
 		if (dataArray != null) {
-			Arrays.stream(dataArray).forEach(d -> d.saveURL(shortUrl, originalUrl, clientIp));
+			Arrays.stream(dataArray).forEach(d -> d.saveURL(shortUrl, originalUrl, clientIp, cookie));
 		}
 	}
 

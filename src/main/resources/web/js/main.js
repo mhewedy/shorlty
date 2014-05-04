@@ -1,4 +1,4 @@
-var shortenTxt = document.getElementById("resultUrlTxt");
+var shortenTxt = $("#resultUrlTxt");
 
 if (shortenTxt){
 	shortenTxt.select();

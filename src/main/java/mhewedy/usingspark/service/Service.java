@@ -9,10 +9,14 @@ import mhewedy.usingspark.data.ParseData;
 import spark.Request;
 import spark.Response;
 
+import com.google.gson.Gson;
+
 public abstract class Service {
 
 	protected static Data inMemoryData = new InMemoryData();
 	protected static Data parseData = new ParseData();
+
+	protected static Gson GSON = new Gson();
 
 	public abstract String doService(Request request, Response response);
 

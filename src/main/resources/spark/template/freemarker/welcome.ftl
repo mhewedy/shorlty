@@ -49,9 +49,19 @@
 				</form></td>
 		</tr>
 	</table>
+	
+	<div id="recentDiv" style="display: none;">
+	</div>
+	<div id="recentLoadDiv" style="display: inline;">
+		<img src="imgs/loading.gif" />
+		<br />
+	</div>
+	
 	<a href="apidoc">API</a> | <a href="https://github.com/MuhammadHewedy/short-url"> source code</a> |By <a href="http://m-hewedy.blogspot.com">mhewedy</a> 
 
 
 </body>
-<script language="javascript" type="text/javascript" src="js/main.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/recent.js"></script>
 </html>

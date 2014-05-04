@@ -4,6 +4,7 @@ import mhewedy.usingspark.data.DataBootstraper;
 import mhewedy.usingspark.service.ApiDocService;
 import mhewedy.usingspark.service.ApiShortenService;
 import mhewedy.usingspark.service.HomeService;
+import mhewedy.usingspark.service.RecentShortenService;
 import mhewedy.usingspark.service.ShortenService;
 import mhewedy.usingspark.service.URLResolveService;
 import mhewedy.usingspark.service.UnShortenService;
@@ -67,6 +68,13 @@ public class App {
 			}
 		});
 
+		Spark.get(new Route("/recent") {
+			@Override
+			public Object handle(Request request, Response response) {
+				return new RecentShortenService().doService(request, response);
+			}
+		});
+
 		Spark.get(new Route("/:shortUrl") {
 			@Override
 			public Object handle(Request request, Response response) {
@@ -77,7 +85,7 @@ public class App {
 		Spark.get(new FreeMarkerRoute("/") {
 			@Override
 			public ModelAndView handle(Request request, Response response) {
-				return new HomeService().doService(null, null, this);
+				return new HomeService().doService(request, response, this);
 			}
 		});
 	}

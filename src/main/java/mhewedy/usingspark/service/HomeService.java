@@ -12,5 +12,4 @@ public class HomeService extends ModelAndViewService {
 		System.out.println("GET /");
 		return viewRoute.modelAndView(null, "welcome.ftl");
 	}
-
 }
