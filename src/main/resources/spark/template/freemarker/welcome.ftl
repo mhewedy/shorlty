@@ -62,7 +62,8 @@
 	 | <a href="ddl/ShortUrl.crx" target="_blank"> <img src="imgs/chrome_icon.png" style="width: 16px; height:16px;" /> Chrome app</a> 
 	 		<em>(<a href="html/install_chrome.html" target="_blank">install</a>)</em> 
 	 | <a href="https://github.com/MuhammadHewedy/short-url" target="_blank"> source code</a> 
-	 | By <a href="http://m-hewedy.blogspot.com" target="_blank">mhewedy</a> 
+	 | by <a href="http://m-hewedy.blogspot.com" target="_blank">mhewedy</a> 
+	 | <a href="https://github.com/MuhammadHewedy/short-url/issues/new" target="_blank">support</a>
 
 </body>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
