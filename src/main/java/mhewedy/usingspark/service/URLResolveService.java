@@ -13,6 +13,8 @@ import org.parse4j.callback.FindCallback;
 import spark.Request;
 import spark.Response;
 
+import com.google.gson.Gson;
+
 public class URLResolveService extends Service {
 
 	@Override
@@ -50,6 +52,8 @@ public class URLResolveService extends Service {
 				if (parseException == null && list != null) {
 					try {
 						ParseObject parseObject = list.get(0);
+
+						System.out.println("parseObject: " + new Gson().toJson(parseObject));
 
 						ParseObject hitsObj = new ParseObject(Columns.HIT_DETAILS_CLASS);
 						hitsObj.put(Columns.IP_COL, ip);
