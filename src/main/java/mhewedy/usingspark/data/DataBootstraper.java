@@ -1,7 +1,6 @@
 package mhewedy.usingspark.data;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -90,7 +89,10 @@ public class DataBootstraper {
 		System.out.printf("done loading %d items\n", list.size());
 
 		System.out.println("Sorting descending by \"createAt\" ....");
-		list.stream().sorted(Comparator.comparing((ParseObject o) -> o.getDate(Columns.CREATED_AT)).reversed());
+		// list.stream().sorted(Comparator.comparing((ParseObject o) ->
+		// o.getDate(Columns.CREATED_AT)).reversed());
+		list.stream().sorted((o1, o2) -> o2.getDate(Columns.CREATED_AT).compareTo(o1.getDate(Columns.CREATED_AT)));
+
 		System.out.println("done sorting");
 
 		return list;
