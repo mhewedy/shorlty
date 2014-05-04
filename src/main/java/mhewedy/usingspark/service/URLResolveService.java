@@ -48,18 +48,22 @@ public class URLResolveService extends Service {
 			@Override
 			public void done(List<ParseObject> list, ParseException parseException) {
 				if (parseException == null && list != null) {
-					System.out.printf("success save shortUrl %s\n", shortUrl);
-					ParseObject parseObject = list.get(0);
+					try {
+						ParseObject parseObject = list.get(0);
 
-					ParseObject hitsObj = new ParseObject(Columns.HIT_DETAILS_CLASS);
-					hitsObj.put(Columns.IP_COL, ip);
-					hitsObj.put(Columns.URL_REL_COL, parseObject);
-					hitsObj.saveInBackground();
+						ParseObject hitsObj = new ParseObject(Columns.HIT_DETAILS_CLASS);
+						hitsObj.put(Columns.IP_COL, ip);
+						hitsObj.put(Columns.URL_REL_COL, parseObject);
+						hitsObj.saveInBackground();
 
-					parseObject.increment(Columns.HIT_COUNT_COL);
-					parseObject.saveInBackground();
+						parseObject.increment(Columns.HIT_COUNT_COL);
+						parseObject.save();
+
+					} catch (ParseException e) {
+						System.err.println(e.getMessage());
+					}
 				} else {
-					System.out.printf("fail save shortUrl %s\n", shortUrl);
+					System.out.printf("fail::: save shortUrl %s\n", shortUrl);
 					System.err.println("ex?: " + parseException);
 				}
 			}
