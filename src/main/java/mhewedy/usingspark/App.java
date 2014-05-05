@@ -91,9 +91,14 @@ public class App {
 	}
 
 	private static void init() {
-		Spark.setPort(Integer.parseInt(System.getenv("PORT")));
-		Parse.initialize("S0ryVHKLgL3MII7OmnIRSvzQkCkAAMtvc6BrCKQS", "iG1oZ8OTNBpIJeLzOz6Oj8sS4y5c2J6Pbd6hEsH2");
-		DataBootstraper.bootstrap();
-		Spark.staticFileLocation("web");
+		try {
+			Spark.setPort(Integer.parseInt(System.getenv("PORT")));
+			Parse.initialize("S0ryVHKLgL3MII7OmnIRSvzQkCkAAMtvc6BrCKQS", "iG1oZ8OTNBpIJeLzOz6Oj8sS4y5c2J6Pbd6hEsH2");
+			DataBootstraper.bootstrap();
+			Spark.staticFileLocation("web");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.exit(-1);
+		}
 	}
 }

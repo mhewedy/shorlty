@@ -14,6 +14,7 @@ public class InMemoryData implements Data {
 
 	@Override
 	public String getOriginalURL(String shortUrl) {
+		System.out.println("get original url from memory");
 		return shortenUrlMap.get(shortUrl);
 	}
 
@@ -22,7 +23,8 @@ public class InMemoryData implements Data {
 		return 1;
 	}
 
-	public static void copyFrom(Map<String, String> map) {
-		shortenUrlMap.putAll(map);
+	static void saveData(String shortUrl, String originalUrl) {
+		System.out.printf("saving ref for %s\n", shortUrl);
+		shortenUrlMap.put(shortUrl, originalUrl);
 	}
 }

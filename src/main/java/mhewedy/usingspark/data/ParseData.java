@@ -32,11 +32,15 @@ public class ParseData implements Data {
 
 	@Override
 	public String getOriginalURL(String shortUrl) {
+		System.out.println("get original url from db");
+
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Columns.URL_MAPPING_CLASS);
 		try {
 			List<ParseObject> list = query.whereEqualTo(Columns.SHORT_URL_COL, shortUrl).find();
 			if (list != null) {
-				return (String) list.stream().map(o -> o.get(Columns.ORIG_URL_COL)).findFirst().orElse("");
+				String origUrl = list.stream().map(o -> o.getString(Columns.ORIG_URL_COL)).findFirst().orElse("");
+				InMemoryData.saveData(shortUrl, origUrl);
+				return origUrl;
 			}
 		} catch (ParseException e) {
 			System.err.println(e.getMessage());

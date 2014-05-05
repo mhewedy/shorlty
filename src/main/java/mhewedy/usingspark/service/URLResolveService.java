@@ -40,7 +40,7 @@ public class URLResolveService extends Service {
 	}
 
 	void saveUrlHitsAsync(String shortUrl, String ip) {
-		System.out.printf("save shortUrl %s\n", shortUrl);
+		System.out.printf("save hit for shortUrl %s\n", shortUrl);
 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Columns.URL_MAPPING_CLASS).whereEqualTo(
 				Columns.SHORT_URL_COL, shortUrl);
