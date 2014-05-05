@@ -61,7 +61,8 @@
 	<a href="apidoc" target="_blank">API</a>
 	 | <a href="ddl/ShortUrl.crx" target="_blank"> <img src="imgs/chrome_icon.png" style="width: 16px; height:16px;" /> Chrome app</a> 
 	 		<em>(<a href="html/install_chrome.html" target="_blank">install</a>)</em> 
-	 | <a href="https://github.com/MuhammadHewedy/short-url" target="_blank"> source code</a> 
+	 | <a href="https://github.com/MuhammadHewedy/short-url" target="_blank"> source code</a>
+	 | <a href="https://github.com/MuhammadHewedy/short-url-chrome" target="_blank"> chrome app source code</a>  
 	 | by <a href="http://m-hewedy.blogspot.com" target="_blank">mhewedy</a> 
 	 | <a href="https://github.com/MuhammadHewedy/short-url/issues/new" target="_blank">support</a>
 
