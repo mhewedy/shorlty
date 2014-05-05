@@ -1,12 +1,15 @@
 package mhewedy.usingspark.data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
+
+import com.google.gson.Gson;
 
 public class DataBootstraper {
 	/**
@@ -72,15 +75,35 @@ public class DataBootstraper {
 
 		List<ParseObject> list = new ArrayList<>();
 		try {
-			final int skip = 1000;
-
-			List<ParseObject> subList = null;
-			query.limit(skip);
-
+			final int limit = 1000;
+			int skip = 0;
 			int count = 1;
+			final int upperSkipLimit = 10000;
+			List<ParseObject> subList = null;
+
+			query.limit(limit);
+
 			while ((subList = query.find()) != null) {
 				list.addAll(subList);
-				query.skip(skip * count++);
+
+				skip = limit * count++;
+
+				if (skip == upperSkipLimit) {
+					System.out.println("done loading 11k objects");
+					count = 1;
+					skip = 0;
+
+
+					ParseObject lastObj = subList.get(subList.size() - 1);
+					System.out.println(new Gson().toJson(lastObj));
+					System.out.println("createAt: " + lastObj.get("createdAt"));
+
+					Date lastDate = lastObj.getDate(Columns.CREATED_AT);
+
+					System.out.println(">>>>>: " + lastDate);
+					query.whereLessThanOrEqualTo(Columns.CREATED_AT, lastDate);
+				}
+				query.skip(skip);
 			}
 		} catch (Exception ex) {
 			System.err.println("cannot restore Parse.com records!");
