@@ -34,7 +34,7 @@ public class Base64Ops {
 		}
 	}
 
-	static void resotreCurrentVal(String cValue) {
+	static void restoreCurrentVal(String cValue) {
 		currentVal = cValue;
 	}
 }

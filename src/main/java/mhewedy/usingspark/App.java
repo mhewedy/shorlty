@@ -1,6 +1,6 @@
 package mhewedy.usingspark;
 
-import mhewedy.usingspark.data.DataBootstraper;
+import mhewedy.usingspark.data.DataBootstrap;
 import mhewedy.usingspark.service.ApiDocService;
 import mhewedy.usingspark.service.ApiShortenService;
 import mhewedy.usingspark.service.HomeService;
@@ -94,7 +94,7 @@ public class App {
 		try {
 			Spark.setPort(Integer.parseInt(System.getenv("PORT")));
 			Parse.initialize("S0ryVHKLgL3MII7OmnIRSvzQkCkAAMtvc6BrCKQS", "iG1oZ8OTNBpIJeLzOz6Oj8sS4y5c2J6Pbd6hEsH2");
-			DataBootstraper.bootstrap();
+			DataBootstrap.bootstrap();
 			Spark.staticFileLocation("web");
 		} catch (Exception ex) {
 			ex.printStackTrace();

@@ -7,8 +7,7 @@ import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 import org.parse4j.callback.SaveCallback;
 
-// TODO: should completely encapsulate Parse.com APIs, so if need change the datastore, it should be pretty simple,
-// so instead of PraseData it should be PersistedData
+// TODO: should completely encapsulate Parse.com APIs, so if need change the datastore, it should be pretty simple, so instead of PraseData it should be PersistedData
 public class ParseData implements Data {
 
 	@Override
@@ -19,6 +18,7 @@ public class ParseData implements Data {
 		parseObject.put(Columns.ORIG_URL_COL, originalUrl);
 		parseObject.put(Columns.IP_COL, clientIp);
 		parseObject.put(Columns.OWNER_ID_COL, cookie);
+        
 		parseObject.saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException parseException) {
