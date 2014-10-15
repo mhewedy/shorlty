@@ -22,7 +22,7 @@
 						<#if shorten_url??>
 							<tr>
 								<td colspan="2">
-								<input type="text" id="resultUrlTxt" value="${shorten_url}"/> <em>press ctrl+s to copy<em>									
+								<input type="text" id="resultUrlTxt" value="${shorten_url}"/> <em>press ctrl+c to copy<em>									
 								</td>
 							</tr>
 						</#if>
@@ -40,7 +40,7 @@
 						<#if original_url??>
 							<tr>
 								<td colspan="2">
-								<input type="text" id="resultUrlTxt" value="${original_url}"/> <em>press ctrl+s to copy<em>
+								<input type="text" id="resultUrlTxt" value="${original_url}"/> <em>press ctrl+c to copy<em>
 								</td>
 							</tr>
 						</#if>

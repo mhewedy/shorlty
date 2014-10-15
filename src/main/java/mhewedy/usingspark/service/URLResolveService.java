@@ -13,6 +13,7 @@ import org.parse4j.callback.FindCallback;
 import spark.Request;
 import spark.Response;
 
+@org.springframework.stereotype.Service
 public class URLResolveService extends Service {
 
 	@Override
@@ -22,7 +23,7 @@ public class URLResolveService extends Service {
 
 		if (shortUrl != null && !shortUrl.isEmpty()) {
 
-			String originalUrl = Data.getOriginalURL(new Data[] { inMemoryData, parseData }, shortUrl);
+			String originalUrl = Data.getOriginalURL(dataList, shortUrl);
 
 			if (originalUrl != null && !originalUrl.isEmpty()) {
 				System.out.println("redirect to: " + originalUrl);

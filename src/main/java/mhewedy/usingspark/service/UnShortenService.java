@@ -5,11 +5,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import mhewedy.usingspark.data.Data;
+
+import org.springframework.stereotype.Service;
+
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.TemplateViewRoute;
 
+@Service
 public class UnShortenService extends ModelAndViewService {
 
 	@Override
@@ -21,7 +25,7 @@ public class UnShortenService extends ModelAndViewService {
 			String shortUrl = url.substring(url.lastIndexOf(request.host()) + request.host().length() + 1);
 			System.out.printf("try finding originalUrl for seqNum %s \n", shortUrl);
 
-			String originalUrl = Data.getOriginalURL(new Data[] { inMemoryData, parseData }, shortUrl);
+			String originalUrl = Data.getOriginalURL(dataList, shortUrl);
 
 			if ("".equals(originalUrl)) {
 				originalUrl = getOriginalUrlExternalService(url);

@@ -16,6 +16,7 @@ import org.parse4j.ParseQuery;
 import spark.Request;
 import spark.Response;
 
+@org.springframework.stereotype.Service
 public class RecentShortenService extends Service {
 
 	@Override

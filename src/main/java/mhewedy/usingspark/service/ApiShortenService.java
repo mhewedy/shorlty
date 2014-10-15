@@ -1,8 +1,11 @@
 package mhewedy.usingspark.service;
 
+import org.springframework.stereotype.Service;
+
 import spark.Request;
 import spark.Response;
 
+@Service
 public class ApiShortenService extends ShortenService {
 
 	@Override

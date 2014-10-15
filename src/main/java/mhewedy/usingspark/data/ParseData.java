@@ -6,8 +6,11 @@ import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 import org.parse4j.callback.SaveCallback;
+import org.springframework.stereotype.Component;
 
-// TODO: should completely encapsulate Parse.com APIs, so if need change the datastore, it should be pretty simple, so instead of PraseData it should be PersistedData
+// TODO: should completely encapsulate Parse.com APIs, so if need change the datastore,
+// it should be pretty simple, so instead of PraseData it should be PersistedData
+@Component
 public class ParseData implements Data {
 
 	@Override

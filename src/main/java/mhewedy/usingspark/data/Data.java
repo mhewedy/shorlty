@@ -1,7 +1,8 @@
 package mhewedy.usingspark.data;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public interface Data {
 
@@ -11,16 +12,20 @@ public interface Data {
 
 	String getOriginalURL(String shortUrl);
 
-	static void saveURL(Data[] dataArray, String shortUrl, String originalUrl, String clientIp, String cookie) {
-		if (dataArray != null) {
-			Arrays.stream(dataArray).forEach(d -> d.saveURL(shortUrl, originalUrl, clientIp, cookie));
+	static void saveURL(List<Data> dataList, String shortUrl,
+			String originalUrl, String clientIp, String cookie) {
+		if (dataList != null) {
+			dataList.stream().forEach(
+					d -> d.saveURL(shortUrl, originalUrl, clientIp, cookie));
 		}
 	}
 
-	static String getOriginalURL(Data[] dataArray, String shortUrl) {
-		if (dataArray != null) {
-			Arrays.sort(dataArray, Comparator.comparing(d -> d.getPriority()));
-			return Arrays.stream(dataArray)
+	static String getOriginalURL(List<Data> dataList, String shortUrl) {
+		if (dataList != null) {
+			Collections.sort(dataList,
+					Comparator.comparing(d -> d.getPriority()));
+
+			return dataList.stream()
 				.map(d -> d.getOriginalURL(shortUrl))
 				.filter(u -> u != null && !u.isEmpty())
 				.findFirst().orElse("");

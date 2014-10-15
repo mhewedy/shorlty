@@ -3,6 +3,9 @@ package mhewedy.usingspark.data;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class InMemoryData implements Data {
 
 	private static Map<String, String> shortenUrlMap = new HashMap<>();

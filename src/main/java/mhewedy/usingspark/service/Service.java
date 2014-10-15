@@ -1,11 +1,12 @@
 package mhewedy.usingspark.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import mhewedy.usingspark.data.Data;
-import mhewedy.usingspark.data.InMemoryData;
-import mhewedy.usingspark.data.ParseData;
 import spark.Request;
 import spark.Response;
 
@@ -13,8 +14,8 @@ import com.google.gson.Gson;
 
 public abstract class Service {
 
-	protected static Data inMemoryData = new InMemoryData();
-	protected static Data parseData = new ParseData();
+	@Inject
+	protected List<Data> dataList;
 
 	protected static Gson GSON = new Gson();
 
