@@ -3,7 +3,10 @@ package mhewedy.usingspark.service;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
+import mhewedy.usingspark.Constants;
 import mhewedy.usingspark.data.Data;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +24,7 @@ public class UnShortenService extends ModelAndViewService {
 		System.out.println("POST /unshorten");
 		String url = request.queryParams("url");
 
-		if (url != null) {
+		if (url != null && !url.isEmpty()) {
 			String shortUrl = url.substring(url.lastIndexOf(request.host()) + request.host().length() + 1);
 			System.out.printf("try finding originalUrl for seqNum %s \n", shortUrl);
 
@@ -32,7 +35,10 @@ public class UnShortenService extends ModelAndViewService {
 			}
 			return viewRoute.modelAndView(getObjectMap(null, originalUrl), "welcome.ftl");
 		}
-		return viewRoute.modelAndView(null, "welcome.ftl");
+
+		Map<String, String> map = new HashMap<>();
+		map.put("appname", Constants.APP_NAME);
+		return viewRoute.modelAndView(map, "welcome.ftl");
 	}
 
 	private String getOriginalUrlExternalService(String shortUrl) {

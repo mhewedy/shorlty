@@ -1,73 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Welcome!</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+
+<title>${appname}</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap theme -->
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/theme.css" rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body style="text-align: center;">
-	<h3>Welcome to (un)shorten url service (beta)</h3>
 
-	<table border="1"
-		style="vertical-align: middle; width: 90%; border: medium; margin: 0 auto; height: 100px">
-		<tr>
-			<td style="vertical-align: top;">
-				<form method="post" action="/shorten">
-					<table>
-						<tr>
-							<td>enter url to shorten</td>
-							<td><input type="text" name="url"/>
-							<input type="submit" value="shorten me" />
-							</td>
-						</tr>
-						<#if shorten_url??>
-							<tr>
-								<td colspan="2">
-								<input type="text" id="resultUrlTxt" value="${shorten_url}"/> <em>press ctrl+c to copy<em>									
-								</td>
-							</tr>
-						</#if>
-					</table>
-				</form></td>
-			<td align="right" style="vertical-align: top; width: 50%; align;">
-				<form method="post" action="/unshorten">
-					<table>
-						<tr>
-							<td>enter url to unshorten</td>
-							<td><input type="text" name="url" />
-							<input type="submit" value="unshorten me" />
-							</td>
-						</tr>
-						<#if original_url??>
-							<tr>
-								<td colspan="2">
-								<input type="text" id="resultUrlTxt" value="${original_url}"/> <em>press ctrl+c to copy<em>
-								</td>
-							</tr>
-						</#if>
-					</table>
-					<em align="left" style="font-size: 10pt;">You can put the shorten url from any service 
-						(ex. <b>tinyurl.com</b> or <b>bitly.com</b>) to see the original url before open.</em>
-				</form></td>
-		</tr>
-	</table>
-	
-	<div id="recentDiv" style="display: none;">
-	</div>
-	<div id="recentLoadDiv" style="display: inline;">
-		<img src="imgs/loading.gif" />
-		<br />
-	</div>
-	
-	<a href="apidoc" target="_blank">API</a>
-	 | <a href="ddl/ShortUrl.crx" target="_blank"> <img src="imgs/chrome_icon.png" style="width: 16px; height:16px;" /> Chrome app</a> 
-	 		<em>(<a href="html/install_chrome.html" target="_blank">install</a>)</em> 
-	 | <a href="https://github.com/MuhammadHewedy/short-url" target="_blank"> source code</a>
-	 | <a href="https://github.com/MuhammadHewedy/short-url-chrome" target="_blank"> chrome app source code</a>  
-	 | by <a href="http://m-hewedy.blogspot.com" target="_blank">mhewedy</a> 
-	 | <a href="https://github.com/MuhammadHewedy/short-url/issues/new" target="_blank">support</a>
+<body role="document">
 
-</body>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">${appname}</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="apidoc" target="_blank">API</a></li>
+					<li><a href="html/install_chrome.html" target="_blank">Chrome App</a></li>
+					<li><a href="https://github.com/MuhammadHewedy/short-url" target="_blank">Source Code</a></li>
+					<li><a href="https://github.com/MuhammadHewedy/short-url/issues/new" target="_blank">Support</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<div class="container theme-showcase" role="main">
+
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<h2>${appname}</h2>
+			<p>
+				${appname} is an open source shorten and unshorten URL website, you
+				can fork source code at <a
+					href="https://github.com/MuhammadHewedy/short-url" target="_blank">github</a>
+			</p>
+
+			<div class="row marketing">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">Shorten URL</h3>
+							</div>
+							<form method="post" action="/shorten">
+								<div class="input-group">
+									<input type="input" name="url" class="form-control" placeholder="Enter URL to shorten" 
+										required="" <#if shorten_url??>value="${shorten_url}" autofocus=""</#if> />
+									<span class="input-group-btn">
+										<input type="submit" class="btn btn-default" value="Go!" />
+									</span>
+								</div>
+							</form>
+							<#if shorten_url??>
+								<div>
+									<br /> <h4><span class="label label-success">Success! Press CTRL+C to copy</span></h4> 
+								</div>
+							</#if>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-danger">
+							<div class="panel-heading">
+								<h3 class="panel-title">Extract URL</h3>
+							</div>
+							<form method="post" action="/unshorten">
+								<div class="input-group">
+									<input type="input" name="url" class="form-control" placeholder="Enter short URL to extract" 
+										required="" <#if original_url??>value="${original_url}" autofocus=""</#if> />
+									<span class="input-group-btn">
+										<input type="submit" class="btn btn-default" value="Go!" />
+									</span>
+								</div>
+							</form>
+							<#if original_url??>
+								<div>
+									<br /> <h4><span class="label label-success">Success! Press CTRL+C to copy</span></h4>
+								</div>
+							</#if>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="alert alert-info" role="alert">
+			<strong>Heads up!</strong> You can put the URL that generated from any
+			service (ex. <strong>tinyurl.com</strong> or <strong>bitly.com</strong>) to see the original url before
+			open.
+		</div>
+		
+		<div id="recent" style="display: none;">
+			<div class="col-md-12">
+				<table class="table" id="resultTable">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Short URL</th>
+							<th>Created</th>
+							<th>Original URL</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		<!-- // table -->
+		</div>
+		
+		<div id="recentLoadDiv" style="text-align: center; display: block;">
+			<img src="imgs/loading.gif" />
+			<br />
+		</div>
+
+	</div>
+	<!-- /container -->
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="js/main.js"></script>
 	<script src="js/recent.js"></script>
+</body>
 </html>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import mhewedy.usingspark.Constants;
 import mhewedy.usingspark.data.Data;
 import spark.Request;
 import spark.Response;
@@ -23,6 +24,7 @@ public abstract class Service {
 
 	protected static Map<String, Object> getObjectMap(String shortenUrl, String originalUrl) {
 		Map<String, Object> attrs = new HashMap<>();
+		attrs.put("appname", Constants.APP_NAME);
 		attrs.put("shorten_url", shortenUrl);
 		attrs.put("original_url", originalUrl);
 		return attrs;

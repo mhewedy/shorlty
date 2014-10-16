@@ -1,19 +1,13 @@
-
-$.getJSON( "recent", function( data ) {
-	
+$.getJSON("recent", function( data ) {
 	$("#recentLoadDiv").css("display", "none");
-	$("#recentDiv").css("display", "inline");
-	
 	var content = "";
 	
 	if (data.length != 0){
-		var content = '<br /><br /><b>recent activity</b>'+
-			'<table border="1" style="vertical-align: middle; border: medium; margin: 0 auto; height: 100px">';
-			content+= '<tr><td >original url</td>'+
-			'<td >created</td>'+
-			'<td >short url</td>'+
-			'<td >hits</td></tr>';
+		$("#recent").css("display", "inline");
 		
+		var i = data.length;
+		
+		data = data.reverse();
 		$.each( data, function( key, val ) {
 			
 			var oringalUrl = val['originalUrl'];
@@ -21,19 +15,21 @@ $.getJSON( "recent", function( data ) {
 			var createdAt = val['createdAt'];
 			var hitCount = val['hitCount'];
 			
-			var trimAt = 70;
-			var trimmedOriginalUrl = (oringalUrl.length > trimAt) ? oringalUrl.substr(0, trimAt) + '...' : oringalUrl;
-			var trimmedshortUrl = (shortUrl.length > trimAt) ? shortUrl.substr(0, trimAt) + '...' : shortUrl;
+			var trimAtOriginalUrl = 80;
+			var trimAtShortUrl = 30;
 			
-			content += '<tr><td style="text-align: left;"><a href="' + oringalUrl + '" target="_blank">' + trimmedOriginalUrl + '<a></td>'
-			+ '<td>' + createdAt + '</td>'
-			+ '<td style="text-align: left;"><a href="' + shortUrl + '" target="_blank">' + trimmedshortUrl +'</a></td>'
-			+ '<td>' + hitCount + '</td></tr>';
+			var trimmedOriginalUrl = (oringalUrl.length > trimAtOriginalUrl) ? oringalUrl.substr(0, trimAtOriginalUrl) + '...' : oringalUrl;
+			var trimmedshortUrl = (shortUrl.length > trimAtShortUrl) ? shortUrl.substr(0, trimAtShortUrl) + '...' : shortUrl;
+			
+			var row = $("#resultTable")[0].insertRow(1)
+			row.insertCell(0).innerHTML = i--;
+			row.insertCell(1).innerHTML = '<a href=' + trimmedshortUrl + ' target="_blank" >' + trimmedshortUrl + '</a>' 
+											+ ' <span class="badge">' + hitCount + '</span>';
+			row.insertCell(2).innerHTML = createdAt;
+			row.insertCell(3).innerHTML = '<a href=' + trimmedOriginalUrl + ' target="_blank" >' + trimmedOriginalUrl + '</a>';
+			
 		});
-		 
-		content += "</table><br />"	
 	}else{
-		content = "<br />"
+		$("#recent").css("display", "none");
 	}
-	$('#recentDiv').append(content);
 });
