@@ -41,11 +41,11 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">${appname}</a>
+				<a class="navbar-brand" href="/">${appname}</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="active"><a href="/">Home</a></li>
 					<li><a href="apidoc" target="_blank">API</a></li>
 					<li><a href="html/install_chrome.html" target="_blank">Chrome App</a></li>
 					<li><a href="https://github.com/MuhammadHewedy/short-url" target="_blank">Source Code</a></li>
