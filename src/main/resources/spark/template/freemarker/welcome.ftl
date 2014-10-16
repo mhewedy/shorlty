@@ -76,8 +76,8 @@
 							</div>
 							<form method="post" action="/shorten">
 								<div class="input-group">
-									<input type="input" name="url" class="form-control" placeholder="Enter URL to shorten" 
-										required="" <#if shorten_url??>value="${shorten_url}" autofocus=""</#if>/>
+									<input type="input" id="short" name="url" class="form-control" placeholder="Enter URL to shorten" 
+										required="" <#if shorten_url??>value="${shorten_url}"</#if>/>
 									<span class="input-group-btn">
 										<input type="submit" class="btn btn-default" value="Go!" />
 									</span>
@@ -92,8 +92,8 @@
 							</div>
 							<form method="post" action="/unshorten">
 								<div class="input-group">
-									<input type="input" id="urlTxt" name="url" class="form-control" placeholder="Enter short URL to extract" 
-										required="" <#if original_url??>value="${original_url}" autofocus=""</#if> />
+									<input type="input" id="unshort" name="url" class="form-control" placeholder="Enter short URL to extract" 
+										required="" <#if original_url??>value="${original_url}"</#if> />
 									<span class="input-group-btn">
 										<input type="submit" class="btn btn-default" value="Go!" />
 									</span>
@@ -152,7 +152,15 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="js/main.js"></script>
 	<script src="js/recent.js"></script>
+	
+	<script type="text/javascript">
+		<#if shorten_url??>
+			$("#short").select();
+		</#if>
+		<#if original_url??>
+			$("#unshort").select();
+		</#if>
+	</script>
 </body>
 </html>

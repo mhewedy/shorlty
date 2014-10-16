@@ -21,8 +21,8 @@ public class UnShortenService extends ModelAndViewService {
 
 	@Override
 	public ModelAndView doService(Request request, Response response, TemplateViewRoute viewRoute) {
-		System.out.println("POST /unshorten");
 		String url = request.queryParams("url");
+		System.out.println("POST /unshorten, url: " + url);
 
 		if (url != null && !url.isEmpty()) {
 			String shortUrl = url.substring(url.lastIndexOf(request.host()) + request.host().length() + 1);
@@ -32,6 +32,10 @@ public class UnShortenService extends ModelAndViewService {
 
 			if ("".equals(originalUrl)) {
 				originalUrl = getOriginalUrlExternalService(url);
+			}
+
+			if ("".equals(originalUrl)) {
+				originalUrl = url;
 			}
 			return viewRoute.modelAndView(getObjectMap(null, originalUrl), "welcome.ftl");
 		}
