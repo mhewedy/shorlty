@@ -15,7 +15,8 @@ public class DataBootstrap {
 	public static void bootstrap() throws ParseException {
 		System.out.println("start bootstrap....");
 
-		List<ParseObject> list = ParseQuery.getQuery(Columns.URL_MAPPING_CLASS).orderByDescending(Columns.CREATED_AT)
+		List<ParseObject> list = ParseQuery.getQuery(Columns.URL_MAPPING_CLASS)
+				.orderByDescending(Columns.CREATED_AT)
 				.find();
 		if (list != null && !list.isEmpty()) {
 			String maxIncrValue = list.get(0).getString(Columns.SHORT_URL_COL);
