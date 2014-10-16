@@ -77,17 +77,12 @@
 							<form method="post" action="/shorten">
 								<div class="input-group">
 									<input type="input" name="url" class="form-control" placeholder="Enter URL to shorten" 
-										required="" <#if shorten_url??>value="${shorten_url}" autofocus=""</#if> autofocus=""/>
+										required="" <#if shorten_url??>value="${shorten_url}" autofocus=""</#if>/>
 									<span class="input-group-btn">
 										<input type="submit" class="btn btn-default" value="Go!" />
 									</span>
 								</div>
 							</form>
-							<#if shorten_url??>
-								<div>
-									<h4><span class="label label-success">Success! Press CTRL+C to copy</span></h4> 
-								</div>
-							</#if>
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -97,23 +92,23 @@
 							</div>
 							<form method="post" action="/unshorten">
 								<div class="input-group">
-									<input type="input" name="url" class="form-control" placeholder="Enter short URL to extract" 
+									<input type="input" id="urlTxt" name="url" class="form-control" placeholder="Enter short URL to extract" 
 										required="" <#if original_url??>value="${original_url}" autofocus=""</#if> />
 									<span class="input-group-btn">
 										<input type="submit" class="btn btn-default" value="Go!" />
 									</span>
 								</div>
 							</form>
-							<#if original_url??>
-								<div>
-									<h4><span class="label label-success">Success! Press CTRL+C to copy</span></h4>
-								</div>
-							</#if>
 						</div>
 					</div>
 				</div>
-
 			</div>
+			
+			<#if shorten_url?? || original_url??>
+				<div style="text-align: center;">
+					<h4><span class="label label-success">Success! Press CTRL+C to copy</span></h4>
+				</div>
+			</#if>
 
 		</div>
 

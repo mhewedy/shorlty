@@ -1,5 +1,3 @@
-var shortenTxt = $("#resultUrlTxt");
 
-if (shortenTxt){
-	shortenTxt.select();
-}
+$("input.form-control").select();
+
