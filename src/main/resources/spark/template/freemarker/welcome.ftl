@@ -77,7 +77,8 @@
 							<form method="post" action="/shorten">
 								<div class="input-group">
 									<input type="input" id="short" name="url" class="form-control" placeholder="Enter URL to shorten" 
-										required="" <#if shorten_url??>value="${shorten_url}"</#if>/>
+										required="" <#if shorten_url??>value="${shorten_url}"</#if>
+										<#if !shorten_url?? && !original_url??> autofocus="autofocus" </#if> />
 									<span class="input-group-btn">
 										<input type="submit" class="btn btn-default" value="Go!" />
 									</span>
