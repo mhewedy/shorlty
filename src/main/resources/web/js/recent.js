@@ -23,10 +23,10 @@ $.getJSON("recent", function( data ) {
 			
 			var row = $("#resultTable")[0].insertRow(1)
 			row.insertCell(0).innerHTML = i--;
-			row.insertCell(1).innerHTML = '<a href=' + trimmedshortUrl + ' target="_blank" >' + trimmedshortUrl + '</a>' 
+			row.insertCell(1).innerHTML = '<a href=' + shortUrl + ' target="_blank" >' + trimmedshortUrl + '</a>' 
 											+ ' <span class="badge">' + hitCount + '</span>';
 			row.insertCell(2).innerHTML = createdAt;
-			row.insertCell(3).innerHTML = '<a href=' + trimmedOriginalUrl + ' target="_blank" >' + trimmedOriginalUrl + '</a>';
+			row.insertCell(3).innerHTML = '<a href=' + oringalUrl + ' target="_blank" >' + trimmedOriginalUrl + '</a>';
 			
 		});
 	}else{
