@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mhewedy.usingspark.Constants;
+import mhewedy.usingspark.aspects.ValidateRequestParamURL;
 import mhewedy.usingspark.data.Data;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import spark.TemplateViewRoute;
 public class UnShortenService extends ModelAndViewService {
 
 	@Override
+	@ValidateRequestParamURL
 	public ModelAndView doService(Request request, Response response, TemplateViewRoute viewRoute) {
 		String url = request.queryParams("url");
 		System.out.println("POST /unshorten, url: " + url);

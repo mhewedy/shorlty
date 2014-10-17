@@ -5,6 +5,7 @@ import java.util.Map;
 
 import mhewedy.usingspark.Constants;
 import mhewedy.usingspark.Util;
+import mhewedy.usingspark.aspects.ValidateRequestParamURL;
 import mhewedy.usingspark.data.Base64Ops;
 import mhewedy.usingspark.data.Data;
 
@@ -19,6 +20,7 @@ import spark.TemplateViewRoute;
 public class ShortenService extends ModelAndViewService {
 
 	@Override
+	@ValidateRequestParamURL
 	public ModelAndView doService(Request request, Response response, TemplateViewRoute viewRoute) {
 		System.out.println("POST /shorten");
 		String shortUrl = shortenUrl(request, response);
