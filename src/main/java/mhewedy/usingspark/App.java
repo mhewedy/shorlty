@@ -15,6 +15,9 @@ import spark.Route;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerRoute;
 
+import com.myapps.iplookup.util.IpInfo;
+import com.myapps.iplookup.util.IpLookupHelper;
+
 public class App {
 
 	public static void main(String[] args) {
@@ -81,6 +84,21 @@ public class App {
 			@Override
 			public Object handle(Request request, Response response) {
 				return recentShortenService.doService(request, response);
+			}
+		});
+
+		Spark.get(new Route("/ip") {
+
+			@Override
+			public Object handle(Request request, Response response) {
+				IpInfo ipInfo = IpLookupHelper.getIpInfo("16.100.35.100");
+				String errorMsg = ipInfo.getErrorMsg();
+				if (errorMsg != null) {
+					return "Error: " + errorMsg;
+				} else {
+					return "Country: " + ipInfo.getCountry() + ", "
+							+ ipInfo.getCity() + ", " + ipInfo.getRegion();
+				}
 			}
 		});
 
