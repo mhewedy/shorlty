@@ -25,7 +25,7 @@ $.getJSON("recent", function( data ) {
 			row.insertCell(0).innerHTML = i--;
 			row.insertCell(1).innerHTML = '<a href=' + shortUrl + ' target="_blank" >' + trimmedshortUrl + '</a>' 
 											+ ' <span class="badge">' + hitCount + '</span>';
-			row.insertCell(2).innerHTML = createdAt;
+			row.insertCell(2).innerHTML = new Date(createdAt).toLocaleString();
 			row.insertCell(3).innerHTML = '<a href=' + oringalUrl + ' target="_blank" >' + trimmedOriginalUrl + '</a>';
 			
 		});
