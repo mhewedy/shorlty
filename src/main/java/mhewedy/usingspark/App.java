@@ -30,10 +30,10 @@ public class App {
 
 		Service recentShortenService = context.getBean("recentShortenService", Service.class);
 		Service urlResolveService = context.getBean("URLResolveService", Service.class);
+		Service apiShortenService = context.getBean("apiShortenService", Service.class);
 		ModelAndViewService apiDocService = context.getBean("apiDocService", ModelAndViewService.class);
 		ModelAndViewService homeService = context.getBean("homeService", ModelAndViewService.class);
 		ModelAndViewService shortenService = context.getBean("shortenService", ModelAndViewService.class);
-		ModelAndViewService apiShortenService = context.getBean("apiShortenService", ModelAndViewService.class);
 		ModelAndViewService unShortenService = context.getBean("unShortenService", ModelAndViewService.class);
 
 		Spark.post(new FreeMarkerRoute("/shorten") {

@@ -15,6 +15,8 @@ $.getJSON("recent", function( data ) {
 			var createdAt = val['createdAt'];
 			var hitCount = val['hitCount'];
 			
+			shortUrl = document.location.origin + '/' + shortUrl;
+			
 			var trimAtOriginalUrl = 80;
 			var trimAtShortUrl = 30;
 			

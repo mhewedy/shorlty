@@ -1,19 +1,18 @@
 package mhewedy.usingspark.service;
 
-import org.springframework.stereotype.Service;
-
+import mhewedy.usingspark.Util;
 import spark.Request;
 import spark.Response;
 
-@Service
-public class ApiShortenService extends ShortenService {
+@org.springframework.stereotype.Service
+public class ApiShortenService extends Service {
 
 	@Override
 	public String doService(Request request, Response response) {
 		System.out.println("GET /api/shorten");
 		response.type("application/json");
 
-		String shortUrl = shortenUrl(request, response);
+		String shortUrl = Util.shortenUrl(request, response, dataList);
 		if (shortUrl != null && !shortUrl.isEmpty()) {
 			return jsonResponse(shortUrl);
 		}

@@ -10,7 +10,7 @@ public abstract class ModelAndViewService extends Service {
 
 	public abstract ModelAndView doService(Request request, Response response, TemplateViewRoute viewRoute);
 
-	public String doService(Request request, Response response) {
+	public final String doService(Request request, Response response) {
 		return "";
 	}
 }
