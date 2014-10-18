@@ -1,53 +1,3 @@
-
-function showHits(objectId){
-	$("#recentLoadDiv").css("visibility", "visible");
-	
-	$.getJSON("hits?objectId=" + objectId, function(data){
-		$("#recentLoadDiv").css("visibility", "hidden");
-		
-		if (data.length != 0){
-			
-			var $tableDiv = $('<div></div>');
-			
-			var table = '<div class="col-md-0">' +
-								  '<table class="table table-striped">' +
-								    '<thead>' +
-								      '<tr>' +
-								        '<th>Clicked</th>' +
-								        '<th>City</th>' +
-								      '</tr>' +
-								    '</thead>' +
-								    '<tbody>';
-			
-	        $.each( data, function( key, val ) {
-				var createdAt = val['createdAt'];
-				var location = val['location'];
-				
-				table += '<tr><td>' + new Date(createdAt).toLocaleString() + '</td><td>' + location + '</td></tr>';	
-			});
-	        
-	        var tableFooter = 		'</tbody>' +
-								   '</table>' +
-								 '</div>';
-	        table += tableFooter.toString();
-	        
-	        $tableDiv.append(table);
-	        
-	        BootstrapDialog.show({
-	            title: 'URL Click details',
-	            message: $tableDiv,
-	            buttons: [{
-	                label: 'Close',
-	                action: function(dialogRef){
-	                    dialogRef.close();
-	                }
-	            }]
-	        });
-		}
-	})	
-};
-
-
 // Get Recent
 $.getJSON("recent", function( data ) {
 	$("#recentLoadDiv").css("visibility", "hidden");
@@ -75,12 +25,15 @@ $.getJSON("recent", function( data ) {
 			var trimmedshortUrl = (shortUrl.length > trimAtShortUrl) ? shortUrl.substr(0, trimAtShortUrl) + '...' : shortUrl;
 			
 			var row = $("#resultTable")[0].insertRow(1)
+			var shortUrlCellContent = '';
+			
 			row.insertCell(0).innerHTML = i--;
-			row.insertCell(1).innerHTML = '<a href=' + shortUrl + ' target="_blank" >' + trimmedshortUrl + '</a>'
-											+ ((hitCount > 0) ? ' <a href="javascript:showHits(\'' + objectId + '\')">' : '')
-											+ ' <span class="badge">' + hitCount + '</span></a>'
-											+ ((hitCount > 0) ? '</a>' : '')
-											;
+			shortUrlCellContent = '<a href=' + shortUrl + ' target="_blank" >' + trimmedshortUrl + '</a>';
+			if (hitCount > 0){
+				shortUrlCellContent += ' <a href="javascript:showHits(\'' + objectId + '\')">' + 
+										'<span class="badge">' + hitCount + '</span></a>';
+			}
+			row.insertCell(1).innerHTML = shortUrlCellContent;
 			row.insertCell(2).innerHTML = new Date(createdAt).toLocaleString();
 			row.insertCell(3).innerHTML = '<a href=' + oringalUrl + ' target="_blank" >' + trimmedOriginalUrl + '</a>';
 			
@@ -90,5 +43,51 @@ $.getJSON("recent", function( data ) {
 	}
 });
 // ~ Get Recent
+
+function showHits(objectId){
+	$("#recentLoadDiv").css("visibility", "visible");
+	
+	$.getJSON("hits?objectId=" + objectId, function(data){
+		$("#recentLoadDiv").css("visibility", "hidden");
+		
+		if (data.length != 0){
+			
+			var $tableDiv = $('<div></div>');
+			var table = '<div class="col-md-0">' +
+							'<table class="table table-striped">' +
+								'<thead>' +
+									'<tr>' +
+								    	'<th>Clicked</th>' +
+								    	'<th>City</th>' +
+								    '</tr>' +
+								 '</thead>' +
+								 '<tbody>';
+			var tableFooter = 	 '</tbody>' +
+			   					'</table>' +
+			   				'</div>';
+			
+	        $.each( data, function( key, val ) {
+				var createdAt = val['createdAt'];
+				var location = val['location'];
+				
+				table += '<tr><td>' + new Date(createdAt).toLocaleString() + '</td><td>' + location + '</td></tr>';	
+			});
+	        
+	        table += tableFooter.toString();
+	        $tableDiv.append(table);
+	        
+	        BootstrapDialog.show({
+	            title: 'URL Click details',
+	            message: $tableDiv,
+	            buttons: [{
+	                label: 'Close',
+	                action: function(dialogRef){
+	                    dialogRef.close();
+	                }
+	            }]
+	        });
+		}
+	})	
+};
 
 
