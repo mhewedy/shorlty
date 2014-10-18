@@ -1,6 +1,7 @@
 package mhewedy.usingspark;
 
 import mhewedy.usingspark.data.DataBootstrap;
+import mhewedy.usingspark.service.JsonListService;
 import mhewedy.usingspark.service.ModelAndViewService;
 import mhewedy.usingspark.service.Service;
 
@@ -15,9 +16,6 @@ import spark.Route;
 import spark.Spark;
 import spark.template.freemarker.FreeMarkerRoute;
 
-import com.myapps.iplookup.util.IpInfo;
-import com.myapps.iplookup.util.IpLookupHelper;
-
 public class App {
 
 	public static void main(String[] args) {
@@ -28,9 +26,11 @@ public class App {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"context.xml");
 
-		Service recentShortenService = context.getBean("recentShortenService", Service.class);
+		
 		Service urlResolveService = context.getBean("URLResolveService", Service.class);
 		Service apiShortenService = context.getBean("apiShortenService", Service.class);
+		JsonListService recentShortenService = context.getBean("recentShortenService", JsonListService.class);
+		JsonListService hitDetailsService = context.getBean("hitDetailsService", JsonListService.class);
 		ModelAndViewService apiDocService = context.getBean("apiDocService", ModelAndViewService.class);
 		ModelAndViewService homeService = context.getBean("homeService", ModelAndViewService.class);
 		ModelAndViewService shortenService = context.getBean("shortenService", ModelAndViewService.class);
@@ -87,18 +87,10 @@ public class App {
 			}
 		});
 
-		Spark.get(new Route("/ip") {
-
+		Spark.get(new Route("/hit") {
 			@Override
 			public Object handle(Request request, Response response) {
-				IpInfo ipInfo = IpLookupHelper.getIpInfo("16.100.35.100");
-				String errorMsg = ipInfo.getErrorMsg();
-				if (errorMsg != null) {
-					return "Error: " + errorMsg;
-				} else {
-					return "Country: " + ipInfo.getCountry() + ", "
-							+ ipInfo.getCity() + ", " + ipInfo.getRegion();
-				}
+				return hitDetailsService.doService(request, response);
 			}
 		});
 

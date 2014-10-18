@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import mhewedy.usingspark.Util;
+
 import org.parse4j.ParseObject;
 
 public interface Columns {
@@ -21,8 +23,9 @@ public interface Columns {
 	String CREATED_AT = "createdAt";
 
 	String OBJECT_ID = "objectId";
+	String LOCATION = "location";
 	
-	public static Function<ParseObject, Map<String, Object>> URL_MAPPING_ROW_MAPPING = o -> {
+	Function<ParseObject, Map<String, Object>> URL_MAPPING_ROW_MAPPING = o -> {
 		Map<String, Object> map = new HashMap<>();
 		map.put(Columns.OBJECT_ID, o.getObjectId());
 		map.put(Columns.ORIG_URL_COL, o.get(Columns.ORIG_URL_COL));
@@ -31,4 +34,14 @@ public interface Columns {
 		map.put(Columns.HIT_COUNT_COL, o.getInt(Columns.HIT_COUNT_COL));
 		return map;
 	};
+	
+	Function<ParseObject, Map<String, Object>> HIT_DETAILS_ROW_MAPPING = o -> {
+		Map<String, Object> map = new HashMap<>();
+		map.put(Columns.OBJECT_ID, o.getObjectId());
+		map.put(Columns.IP_COL, o.get(Columns.IP_COL));
+		map.put(Columns.CREATED_AT, o.getCreatedAt());
+		map.put(Columns.LOCATION, Util.ipToCountry((String) o.get(Columns.IP_COL)));
+		return map;
+	};
+
 }

@@ -8,6 +8,9 @@ import mhewedy.usingspark.data.Data;
 import spark.Request;
 import spark.Response;
 
+import com.myapps.iplookup.util.IpInfo;
+import com.myapps.iplookup.util.IpLookupHelper;
+
 public class Util {
 	private Util() {
 	}
@@ -35,6 +38,28 @@ public class Util {
 					Util.createCookie(request, response));
 			shortUrl = Util.qualifyShortUrl(request, shortUrl);
 			return shortUrl;
+		}
+		return "";
+	}
+
+	public static String ipToCountry(String ip) {
+		IpInfo ipInfo = IpLookupHelper.getIpInfo(ip);
+		String errorMsg = ipInfo.getErrorMsg();
+
+		if (errorMsg == null) {
+			return toProperCase(ipInfo.getCountry()) + " "
+					+ toProperCase(ipInfo.getCity()) + " "
+					+ toProperCase(ipInfo.getRegion());
+		} else {
+			System.out.println("Error: " + errorMsg);
+			return "";
+		}
+	}
+
+	public static String toProperCase(String s) {
+		if (s != null && !s.isEmpty() && s.length() > 1) {
+			return s.substring(0, 1).toUpperCase()
+					+ s.substring(1).toLowerCase();
 		}
 		return "";
 	}
