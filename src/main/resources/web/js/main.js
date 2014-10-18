@@ -34,7 +34,7 @@ $.getJSON("recent", function( data ) {
 										'<span class="badge">' + hitCount + '</span></a>';
 			}
 			row.insertCell(1).innerHTML = shortUrlCellContent;
-			row.insertCell(2).innerHTML = new Date(createdAt).toLocaleString();
+			row.insertCell(2).innerHTML = new Date(createdAt + ' GMT').toLocaleString();
 			row.insertCell(3).innerHTML = '<a href=' + oringalUrl + ' target="_blank" >' + trimmedOriginalUrl + '</a>';
 			
 		});
@@ -70,7 +70,7 @@ function showHits(objectId){
 				var createdAt = val['createdAt'];
 				var location = val['location'];
 				
-				table += '<tr><td>' + new Date(createdAt).toLocaleString() + '</td><td>' + location + '</td></tr>';	
+				table += '<tr><td>' + new Date(createdAt + ' GMT').toLocaleString() + '</td><td>' + location + '</td></tr>';	
 			});
 	        
 	        table += tableFooter.toString();
