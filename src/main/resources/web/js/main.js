@@ -8,7 +8,8 @@ function showHits(objectId){
 		if (data.length != 0){
 			
 			var $tableDiv = $('<div></div>');
-			var $tableHeader = '<div class="col-md-0">' +
+			
+			var table = '<div class="col-md-0">' +
 								  '<table class="table table-striped">' +
 								    '<thead>' +
 								      '<tr>' +
@@ -17,17 +18,20 @@ function showHits(objectId){
 								      '</tr>' +
 								    '</thead>' +
 								    '<tbody>';
-			var $tableFooter = 		'</tbody>' +
-								   '</table>' +
-								 '</div>';
-	        $tableDiv.append($tableHeader.toString());
+			
 	        $.each( data, function( key, val ) {
 				var createdAt = val['createdAt'];
 				var location = val['location'];
 				
-				$tableDiv.append('<tr><td>' + new Date(createdAt).toLocaleString() + '</td><td>' + location + '</td></tr>');	
+				table += '<tr><td>' + new Date(createdAt).toLocaleString() + '</td><td>' + location + '</td></tr>';	
 			});
-	        $tableDiv.append($tableFooter.toString());
+	        
+	        var tableFooter = 		'</tbody>' +
+								   '</table>' +
+								 '</div>';
+	        table += tableFooter.toString();
+	        
+	        $tableDiv.append(table);
 	        
 	        BootstrapDialog.show({
 	            title: 'URL Click details',

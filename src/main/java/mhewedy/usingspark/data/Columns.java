@@ -38,9 +38,11 @@ public interface Columns {
 	Function<ParseObject, Map<String, Object>> HIT_DETAILS_ROW_MAPPING = o -> {
 		Map<String, Object> map = new HashMap<>();
 		map.put(Columns.OBJECT_ID, o.getObjectId());
+
+		System.out.println("o.get(Columns.IP_COL): " + o.get(Columns.IP_COL));
 		map.put(Columns.IP_COL, o.get(Columns.IP_COL));
 		map.put(Columns.CREATED_AT, o.getCreatedAt());
-		map.put(Columns.LOCATION, Util.ipToCountry((String) o.get(Columns.IP_COL)));
+		map.put(Columns.LOCATION, /*Util.ipToCountry((String) o.get(Columns.IP_COL))*/ o.get(Columns.IP_COL));
 		return map;
 	};
 
