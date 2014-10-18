@@ -1,8 +1,8 @@
 package mhewedy.usingspark.service;
 
-import java.util.Enumeration;
 import java.util.List;
 
+import mhewedy.usingspark.Util;
 import mhewedy.usingspark.data.Columns;
 import mhewedy.usingspark.data.Data;
 
@@ -29,21 +29,7 @@ public class URLResolveService extends Service {
 			if (originalUrl != null && !originalUrl.isEmpty()) {
 				System.out.println("redirect to: " + originalUrl);
 
-				Enumeration<String> headerNames = request.raw()
-						.getHeaderNames();
-				System.out.println("*******");
-				while (headerNames.hasMoreElements()) {
-					String header = headerNames.nextElement();
-					System.out.println(header + ": " + request.raw().getHeader(header));
-				}
-				System.out.println("*******");
-				System.out.println("request.raw().getRemoteHost(): " + request.raw().getRemoteHost());
-				System.out.println("request.raw().getRemoteAddr(): " + request.raw().getRemoteAddr());
-				System.out.println("request.raw().getLocalAddr(): " + request.raw().getLocalAddr());
-				System.out.println("request.raw().getLocalName(): " + request.raw().getLocalName());
-				System.out.println("*******");
-
-				saveUrlHitsAsync(shortUrl, request.ip());
+				saveUrlHitsAsync(shortUrl, Util.getIpAddress(request));
 				response.redirect(originalUrl);
 			} else {
 				System.err.printf("short url %s not found!\n", shortUrl);

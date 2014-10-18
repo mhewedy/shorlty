@@ -3,6 +3,8 @@ package mhewedy.usingspark;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import mhewedy.usingspark.data.Base64Ops;
 import mhewedy.usingspark.data.Data;
 import spark.Request;
@@ -63,5 +65,17 @@ public class Util {
 					+ s.substring(1).toLowerCase();
 		}
 		return "";
+	}
+
+	public static String getIpAddress(Request request) {
+		HttpServletRequest servletRequest = request.raw();
+		// http://en.wikipedia.org/wiki/X-Forwarded-For
+		String xForwardForHeader = servletRequest.getHeader("X-Forwarded-For");
+		if (xForwardForHeader != null && !xForwardForHeader.isEmpty()) {
+			String[] ips = xForwardForHeader.split(",");
+			return ips[0].trim();
+		} else {
+			return request.ip();
+		}
 	}
 }
