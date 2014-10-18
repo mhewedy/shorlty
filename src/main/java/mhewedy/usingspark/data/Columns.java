@@ -40,7 +40,7 @@ public interface Columns {
 		map.put(Columns.OBJECT_ID, o.getObjectId());
 		map.put(Columns.IP_COL, o.get(Columns.IP_COL));
 		map.put(Columns.CREATED_AT, o.getCreatedAt());
-		map.put(Columns.LOCATION, Util.ipToCountry((String) o.get(Columns.IP_COL))								);
+		map.put(Columns.LOCATION, Util.ipToCountry((String) o.get(Columns.IP_COL)));
 		return map;
 	};
 

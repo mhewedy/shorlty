@@ -43,6 +43,7 @@ public class Util {
 	}
 
 	public static String ipToCountry(String ip) {
+		System.out.println("ipToCountry: " + ip);
 		IpInfo ipInfo = IpLookupHelper.getIpInfo(ip);
 		String errorMsg = ipInfo.getErrorMsg();
 
