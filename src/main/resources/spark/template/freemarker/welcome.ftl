@@ -73,9 +73,7 @@
 		<div class="jumbotron">
 			<h2>${appname}</h2>
 			<p>
-				${appname} is an open source URL <i>shorten</i>, <i>unshorten</i> and <i> tracker</i> website, you
-				can fork source code at <a
-					href="https://github.com/MuhammadHewedy/short-url" target="_blank">github</a>
+				${appname} is an open source URL <i>shorten</i>, <i>unshorten</i> and <i> tracker</i> website.
 			</p>
 
 			<div class="row marketing">
