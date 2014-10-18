@@ -14,6 +14,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap theme -->
 <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="css/bootstrap-dialog.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="css/theme.css" rel="stylesheet">
@@ -45,13 +46,16 @@
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+				
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span> <span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
 				</button>
+				<div id="recentLoadDiv" style="float: left; margin-top: 15px; margin-right: 5px;">
+					<img src="imgs/loading.gif" />
+					<br />
+				</div>
 				<a class="navbar-brand" href="/">${appname}</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
@@ -145,11 +149,6 @@
 			</div>
 		<!-- // table -->
 		</div>
-		
-		<div id="recentLoadDiv" style="text-align: center; display: block;">
-			<img src="imgs/loading.gif" />
-			<br />
-		</div>
 
 	</div>
 	<!-- /container -->
@@ -161,8 +160,9 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-dialog.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="js/recent.js"></script>
+	<script src="js/main.js"></script>
 	
 	<script type="text/javascript">
 		<#if shorten_url??>

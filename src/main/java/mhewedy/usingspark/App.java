@@ -87,7 +87,7 @@ public class App {
 			}
 		});
 
-		Spark.get(new Route("/hit") {
+		Spark.get(new Route("/hits") {
 			@Override
 			public Object handle(Request request, Response response) {
 				return hitDetailsService.doService(request, response);
