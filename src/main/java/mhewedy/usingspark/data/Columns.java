@@ -42,7 +42,7 @@ public interface Columns {
 		System.out.println("o.get(Columns.IP_COL): " + o.get(Columns.IP_COL));
 		map.put(Columns.IP_COL, o.get(Columns.IP_COL));
 		map.put(Columns.CREATED_AT, o.getCreatedAt());
-		map.put(Columns.LOCATION, /*Util.ipToCountry((String) o.get(Columns.IP_COL))*/ o.get(Columns.IP_COL));
+		map.put(Columns.LOCATION, Util.ipToCountry((String) o.get(Columns.IP_COL)));
 		return map;
 	};
 
