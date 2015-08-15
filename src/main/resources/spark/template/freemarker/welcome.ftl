@@ -116,6 +116,9 @@
 						</div>
 					</div>
 				</div>
+				<h3>
+					Please provide us with your feedback here: <a href="http://www.shortly.pw/ACp" target="_blank"> http://www.shortly.pw/ACp </a>
+				</h3>
 			</div>
 			
 			<#if shorten_url?? || original_url??>
