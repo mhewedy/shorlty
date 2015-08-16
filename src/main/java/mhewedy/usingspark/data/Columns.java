@@ -16,6 +16,7 @@ public interface Columns {
 	String ORIG_URL_COL = "originalUrl";
 	String IP_COL = "ip";
 	String OWNER_ID_COL = "owner_id";
+	String SOURCE = "source";
 
 	String HIT_COUNT_COL = "hitCount";
 	String URL_REL_COL = "urlObj";
@@ -32,6 +33,7 @@ public interface Columns {
 		map.put(Columns.CREATED_AT, o.getCreatedAt());
 		map.put(Columns.SHORT_URL_COL, o.get(Columns.SHORT_URL_COL));
 		map.put(Columns.HIT_COUNT_COL, o.getInt(Columns.HIT_COUNT_COL));
+		map.put(Columns.SOURCE, o.get(Columns.SOURCE));
 		return map;
 	};
 	

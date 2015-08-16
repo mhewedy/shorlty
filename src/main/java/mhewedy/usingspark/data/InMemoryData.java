@@ -1,5 +1,6 @@
 package mhewedy.usingspark.data;
 
+import mhewedy.usingspark.Util.Source;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class InMemoryData implements Data {
 	private static Map<String, String> shortenUrlMap = new HashMap<>();
 
 	@Override
-	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie) {
+	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source) {
 		shortenUrlMap.put(shortUrl, originalUrl);
 	}
 

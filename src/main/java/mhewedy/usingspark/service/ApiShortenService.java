@@ -1,6 +1,7 @@
 package mhewedy.usingspark.service;
 
 import mhewedy.usingspark.Util;
+import mhewedy.usingspark.Util.Source;
 import spark.Request;
 import spark.Response;
 
@@ -12,7 +13,7 @@ public class ApiShortenService extends Service {
 		System.out.println("GET /api/shorten");
 		response.type("application/json");
 
-		String shortUrl = Util.shortenUrl(request, response, dataList);
+		String shortUrl = Util.shortenUrl(request, response, dataList, Source.API);
 		if (shortUrl != null && !shortUrl.isEmpty()) {
 			return jsonResponse(shortUrl);
 		}

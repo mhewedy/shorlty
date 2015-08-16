@@ -16,6 +16,10 @@ import com.myapps.iplookup.util.IpLookupHelper;
 public class Util {
 	private Util() {
 	}
+	
+	public static enum Source{
+		WEB, API
+	}
 
 	public static String createCookie(Request request, Response response) {
 		String cookie = request.cookie(Constants.COOKIE_NAME);
@@ -31,13 +35,13 @@ public class Util {
 	}
 
 	public static String shortenUrl(Request request, Response response,
-			List<Data> dataList) {
+			List<Data> dataList, Source source) {
 		String url = request.queryParams("url");
 
 		if (url != null && !url.isEmpty()) {
 			String shortUrl = Base64Ops.increment();
 			Data.saveURL(dataList, shortUrl, url, request.ip(),
-					Util.createCookie(request, response));
+					Util.createCookie(request, response), source);
 			shortUrl = Util.qualifyShortUrl(request, shortUrl);
 			return shortUrl;
 		}

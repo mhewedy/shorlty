@@ -116,9 +116,6 @@
 						</div>
 					</div>
 				</div>
-				<h3>
-					Please provide us with your feedback here: <a href="http://www.shortly.pw/ACp" target="_blank"> http://www.shortly.pw/ACp </a>
-				</h3>
 			</div>
 			
 			<#if shorten_url?? || original_url??>
@@ -126,6 +123,10 @@
 					<h4><span class="label label-success">Success! Press CTRL+C to copy</span></h4>
 				</div>
 			</#if>
+			
+			<h3>
+				Please give feedkback here &gt; <a href="http://www.shortly.pw/ACp" target="_blank"> http://www.shortly.pw/ACp </a>
+			</h3>
 
 		</div>
 

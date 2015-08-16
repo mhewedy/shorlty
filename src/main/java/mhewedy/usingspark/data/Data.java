@@ -1,5 +1,6 @@
 package mhewedy.usingspark.data;
 
+import mhewedy.usingspark.Util.Source;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -8,15 +9,15 @@ public interface Data {
 
 	int getPriority();
 
-	void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie);
+	void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source);
 
 	String getOriginalURL(String shortUrl);
 
 	static void saveURL(List<Data> dataList, String shortUrl,
-			String originalUrl, String clientIp, String cookie) {
+			String originalUrl, String clientIp, String cookie, Source source) {
 		if (dataList != null) {
 			dataList.stream().forEach(
-					d -> d.saveURL(shortUrl, originalUrl, clientIp, cookie));
+					d -> d.saveURL(shortUrl, originalUrl, clientIp, cookie, source));
 		}
 	}
 

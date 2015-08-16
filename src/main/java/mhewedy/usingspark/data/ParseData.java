@@ -1,5 +1,6 @@
 package mhewedy.usingspark.data;
 
+import mhewedy.usingspark.Util.Source;
 import java.util.List;
 
 import org.parse4j.ParseException;
@@ -14,13 +15,14 @@ import org.springframework.stereotype.Component;
 public class ParseData implements Data {
 
 	@Override
-	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie) {
+	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source) {
 
 		ParseObject parseObject = new ParseObject(Columns.URL_MAPPING_CLASS);
 		parseObject.put(Columns.SHORT_URL_COL, shortUrl);
 		parseObject.put(Columns.ORIG_URL_COL, originalUrl);
 		parseObject.put(Columns.IP_COL, clientIp);
 		parseObject.put(Columns.OWNER_ID_COL, cookie);
+		parseObject.put(Columns.SOURCE, source.toString());
         
 		parseObject.saveInBackground(new SaveCallback() {
 			@Override

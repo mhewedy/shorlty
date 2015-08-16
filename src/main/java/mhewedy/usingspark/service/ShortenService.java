@@ -1,5 +1,7 @@
 package mhewedy.usingspark.service;
 
+import mhewedy.usingspark.Util.Source;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +23,7 @@ public class ShortenService extends ModelAndViewService {
 	@ValidateRequestParamURL
 	public ModelAndView doService(Request request, Response response, TemplateViewRoute viewRoute) {
 		System.out.println("POST /shorten");
-		String shortUrl = Util.shortenUrl(request, response, dataList);
+		String shortUrl = Util.shortenUrl(request, response, dataList, Source.WEB);
 
 		if (shortUrl != null && !shortUrl.isEmpty()) {
 			return viewRoute.modelAndView(getObjectMap(shortUrl, null), "welcome.ftl");
