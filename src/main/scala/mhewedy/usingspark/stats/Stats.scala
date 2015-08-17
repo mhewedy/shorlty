@@ -11,7 +11,7 @@ object Stats{
           e => (new SimpleDateFormat("MMM YYYY").format(e._1), e._2)
   }toList} unzip
 
-  def getSourceStats(xs: Stream[ParseObject]) = groupBy (xs) (_.get("source")).toMap map(e => SourceObject(e._1, e._2))
+  def getSourceStats(xs: Stream[ParseObject]) = groupBy (xs) (_.get("source")).filterNot(_._1 == null).toMap map(e => SourceObject(e._1, e._2))
 
   def getTop20OwnerIdStats(xs: Stream[ParseObject]) = (groupBy (xs) (_.get("owner_id")) filterNot(_._2 == 1) sortBy(- _._2) take 20 toList) unzip
 
@@ -19,7 +19,5 @@ object Stats{
     (xs groupBy g).toStream.map(p => (p._1, p._2.length))
   }
 
-  case class SourceObject(n: AnyRef, y: Double){
-    val name = if (n == null) "Unknown" else n
-  }
+  case class SourceObject(name: AnyRef, y: Double)
 }

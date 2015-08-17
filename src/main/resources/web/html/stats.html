@@ -47,7 +47,7 @@
                 text: 'Browsing Sources'
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.y}</b>'
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
             plotOptions: {
                 pie: {
@@ -98,7 +98,7 @@
 </head>
 <body>
 
-    <div id="loading">Loading...</div>
+    <div id="loading" style="font-size: 50px; text-align: center; font-family: Sans-serif" >Loading...</div>
 
     <div id="monthChart"></div>
     <div id="sourceChart"></div>
