@@ -1,7 +1,7 @@
 package mhewedy.usingspark;
 
 import mhewedy.usingspark.data.DataBootstrap;
-import mhewedy.usingspark.service.JsonListService;
+import mhewedy.usingspark.service.JsonService;
 import mhewedy.usingspark.service.ModelAndViewService;
 import mhewedy.usingspark.service.Service;
 
@@ -13,8 +13,10 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import spark.Spark;
+import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerRoute;
+
+import java.util.Date;
 
 public class App {
 
@@ -29,28 +31,36 @@ public class App {
 		
 		Service urlResolveService = context.getBean("URLResolveService", Service.class);
 		Service apiShortenService = context.getBean("apiShortenService", Service.class);
-		JsonListService recentShortenService = context.getBean("recentShortenService", JsonListService.class);
-		JsonListService hitDetailsService = context.getBean("hitDetailsService", JsonListService.class);
+		JsonService recentShortenService = context.getBean("recentShortenService", JsonService.class);
+		JsonService hitDetailsService = context.getBean("hitDetailsService", JsonService.class);
 		ModelAndViewService apiDocService = context.getBean("apiDocService", ModelAndViewService.class);
 		ModelAndViewService homeService = context.getBean("homeService", ModelAndViewService.class);
 		ModelAndViewService shortenService = context.getBean("shortenService", ModelAndViewService.class);
 		ModelAndViewService unShortenService = context.getBean("unShortenService", ModelAndViewService.class);
+		JsonService statsService = context.getBean("statsService", JsonService.class);
 
-		Spark.post(new FreeMarkerRoute("/shorten") {
+		get(new Route("/stats") {
+			@Override
+			public Object handle(Request request, Response response) {
+				return statsService.doService(request, response);
+			}
+		});
+
+		post(new FreeMarkerRoute("/shorten") {
 			@Override
 			public ModelAndView handle(Request request, Response response) {
 				return shortenService.doService(request, response, this);
 			}
 		});
 
-		Spark.post(new FreeMarkerRoute("/unshorten") {
+		post(new FreeMarkerRoute("/unshorten") {
 			@Override
 			public ModelAndView handle(Request request, Response response) {
 				return unShortenService.doService(request, response, this);
 			}
 		});
 
-		Spark.get(new Route("/shorten") {
+		get(new Route("/shorten") {
 			@Override
 			public Object handle(Request request, Response response) {
 				response.redirect("/");
@@ -58,7 +68,7 @@ public class App {
 			}
 		});
 
-		Spark.get(new Route("/unshorten") {
+		get(new Route("/unshorten") {
 			@Override
 			public Object handle(Request request, Response response) {
 				response.redirect("/");
@@ -66,42 +76,42 @@ public class App {
 			}
 		});
 
-		Spark.get(new FreeMarkerRoute("/apidoc") {
+		get(new FreeMarkerRoute("/apidoc") {
 			@Override
 			public ModelAndView handle(Request request, Response response) {
 				return apiDocService.doService(request, response, this);
 			}
 		});
 
-		Spark.get(new Route("/api/shorten") {
+		get(new Route("/api/shorten") {
 			@Override
 			public Object handle(Request request, Response response) {
 				return apiShortenService.doService(request, response);
 			}
 		});
 
-		Spark.get(new Route("/recent") {
+		get(new Route("/recent") {
 			@Override
 			public Object handle(Request request, Response response) {
 				return recentShortenService.doService(request, response);
 			}
 		});
 
-		Spark.get(new Route("/hits") {
+		get(new Route("/hits") {
 			@Override
 			public Object handle(Request request, Response response) {
 				return hitDetailsService.doService(request, response);
 			}
 		});
 
-		Spark.get(new Route("/:shortUrl") {
+		get(new Route("/:shortUrl") {
 			@Override
 			public Object handle(Request request, Response response) {
 				return urlResolveService.doService(request, response);
 			}
 		});
 
-		Spark.get(new FreeMarkerRoute("/") {
+		get(new FreeMarkerRoute("/") {
 			@Override
 			public ModelAndView handle(Request request, Response response) {
 				return homeService.doService(request, response, this);
@@ -111,10 +121,10 @@ public class App {
 
 	private static void init() {
 		try {
-			Spark.setPort(Integer.parseInt(System.getenv("PORT")));
+			setPort(Integer.parseInt(System.getenv("PORT")));
 			Parse.initialize("S0ryVHKLgL3MII7OmnIRSvzQkCkAAMtvc6BrCKQS", "iG1oZ8OTNBpIJeLzOz6Oj8sS4y5c2J6Pbd6hEsH2");
 			DataBootstrap.bootstrap();
-			Spark.staticFileLocation("web");
+			staticFileLocation("web");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			System.exit(-1);

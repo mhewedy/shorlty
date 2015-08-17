@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script>
+
+    $.ajax("/stats").done(function(arr) {
+
+        $('#loading').hide();
+
+        var monthData = arr[0]
+        var sourceData = arr[1]
+        var ownerData = arr[2]
+
+        $('#monthChart').highcharts({
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: 'Monthly Usage'
+            },
+            xAxis: {
+                categories: monthData[0]
+            },
+            yAxis: {
+                title: {
+                    text: 'Usage'
+                }
+            },
+            series: [{
+                name: 'Usage',
+                data: monthData[1]
+            }]
+        });
+
+        $('#sourceChart').highcharts({
+             chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Browsing Sources'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: "Sources",
+                colorByPoint: true,
+                data: sourceData
+            }]
+        });
+
+        $('#ownerChart').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Top 20 Unique User by Usage'
+            },
+            xAxis: {
+                labels: {
+                    rotation: -45
+                },
+                categories: ownerData[0]
+            },
+            yAxis: {
+                title: {
+                    text: 'Usage'
+                }
+            },
+            series: [{
+                name: 'Usage',
+                data: ownerData[1]
+            }]
+        });
+    });
+
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Usage Statistics</title>
+</head>
+<body>
+
+    <div id="loading">Loading...</div>
+
+    <div id="monthChart"></div>
+    <div id="sourceChart"></div>
+    <div id="ownerChart"></div>
+
+</body>
+</html>

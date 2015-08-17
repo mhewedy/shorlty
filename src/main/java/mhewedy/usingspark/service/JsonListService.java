@@ -10,16 +10,9 @@ import org.parse4j.ParseObject;
 import spark.Request;
 import spark.Response;
 
-public abstract class JsonListService extends Service {
+public abstract class JsonListService extends JsonService<List<?>> {
 
 	private Function<ParseObject, Map<String, Object>> objectMapping;
-
-	@Override
-	public final String doService(Request request, Response response) {
-		response.type("application/json");
-		this.objectMapping = getObjectMapping(request);
-		return GSON.toJson(convertToDto(request, doList(request, response)));
-	}
 	
 	public abstract Function<ParseObject, Map<String, Object>> getObjectMapping(
 			Request request);
@@ -31,4 +24,9 @@ public abstract class JsonListService extends Service {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public List<?> getObject(Request request, Response response) {
+		this.objectMapping = getObjectMapping(request);
+		return convertToDto(request, doList(request, response));
+	}
 }
