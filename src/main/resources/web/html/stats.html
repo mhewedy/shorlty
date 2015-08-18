@@ -67,29 +67,37 @@
         });
 
         $('#ownerChart').highcharts({
-            chart: {
-                type: 'column'
+             chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
             },
             title: {
-                text: 'Top 20 Unique User by Usage'
+                text: 'Returning User'
             },
-            xAxis: {
-                labels: {
-                    rotation: -45
-                },
-                categories: ownerData[0]
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
-            yAxis: {
-                title: {
-                    text: 'Usage'
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
             },
             series: [{
-                name: 'Usage',
-                data: ownerData[1]
+                name: "Percentage",
+                colorByPoint: true,
+                data: ownerData
             }]
         });
-    });
+
+     });
+
 
     </script>
 
