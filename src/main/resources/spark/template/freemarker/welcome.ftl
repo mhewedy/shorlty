@@ -42,6 +42,15 @@
 
 <body role="document">
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -123,10 +132,8 @@
 					<h4><span class="label label-success">Success! Press CTRL+C to copy</span></h4>
 				</div>
 			</#if>
-			
-			<h3>
-				Please give feedkback here &gt; <a href="http://www.shortly.pw/ACp" target="_blank"> http://www.shortly.pw/ACp </a>
-			</h3>
+
+			<div class="fb-like" data-href="https://www.facebook.com/shortly.pw" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 
 		</div>
 
