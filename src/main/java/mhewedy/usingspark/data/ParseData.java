@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class ParseData implements Data {
 
 	@Override
-	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source) {
+	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source, boolean isCookieEnabled) {
 
 		ParseObject parseObject = new ParseObject(Columns.URL_MAPPING_CLASS);
 		parseObject.put(Columns.SHORT_URL_COL, shortUrl);
@@ -23,6 +23,7 @@ public class ParseData implements Data {
 		parseObject.put(Columns.IP_COL, clientIp);
 		parseObject.put(Columns.OWNER_ID_COL, cookie);
 		parseObject.put(Columns.SOURCE, source.toString());
+		parseObject.put(Columns.IS_COOKIE_ENABLED, isCookieEnabled);
         
 		parseObject.saveInBackground(new SaveCallback() {
 			@Override

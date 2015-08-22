@@ -12,7 +12,7 @@ public class InMemoryData implements Data {
 	private static Map<String, String> shortenUrlMap = new HashMap<>();
 
 	@Override
-	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source) {
+	public void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source, boolean isCookieEnabled) {
 		shortenUrlMap.put(shortUrl, originalUrl);
 	}
 

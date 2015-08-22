@@ -9,15 +9,15 @@ public interface Data {
 
 	int getPriority();
 
-	void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source);
+	void saveURL(String shortUrl, String originalUrl, String clientIp, String cookie, Source source, boolean isCookieEnabled);
 
 	String getOriginalURL(String shortUrl);
 
 	static void saveURL(List<Data> dataList, String shortUrl,
-			String originalUrl, String clientIp, String cookie, Source source) {
+						String originalUrl, String clientIp, String cookie, Source source, boolean isCookieEnabled) {
 		if (dataList != null) {
 			dataList.stream().forEach(
-					d -> d.saveURL(shortUrl, originalUrl, clientIp, cookie, source));
+					d -> d.saveURL(shortUrl, originalUrl, clientIp, cookie, source, isCookieEnabled));
 		}
 	}
 

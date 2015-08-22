@@ -101,8 +101,9 @@
 									<input type="input" id="short" name="url" class="form-control" placeholder="Enter URL to shorten" 
 										required="" <#if shorten_url??>value="${shorten_url}"</#if>
 										<#if !shorten_url?? && !original_url??> autofocus="autofocus" </#if> />
+									<input type="hidden" name="isCookieEnabled" id="isCookieEnabled" />
 									<span class="input-group-btn">
-										<input type="submit" class="btn btn-default" value="Go!" />
+										<input type="submit" id="submit" class="btn btn-default" value="Go!" />
 									</span>
 								</div>
 							</form>
@@ -182,6 +183,23 @@
 		<#if original_url??>
 			$("#unshort").select();
 		</#if>
+
+		function checkCookie(){
+			var cookieEnabled=(navigator.cookieEnabled)? true : false;
+			if (typeof navigator.cookieEnabled=="undefined" && !cookieEnabled){
+				document.cookie="testcookie";
+				cookieEnabled=(document.cookie.indexOf("testcookie")!=-1)? true : false;
+			}
+			return cookieEnabled
+		}
+
+		$(function () {
+            $("#submit").on("click", function () {
+                $("#isCookieEnabled").val(checkCookie());
+            });
+        });
+
+
 	</script>
 </body>
 </html>

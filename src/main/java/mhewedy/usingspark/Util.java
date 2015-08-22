@@ -37,11 +37,12 @@ public class Util {
 	public static String shortenUrl(Request request, Response response,
 			List<Data> dataList, Source source) {
 		String url = request.queryParams("url");
+		boolean isCookieEnabled = "true".equalsIgnoreCase(request.queryParams("isCookieEnabled"));
 
 		if (url != null && !url.isEmpty()) {
 			String shortUrl = Base64Ops.increment();
 			Data.saveURL(dataList, shortUrl, url, request.ip(),
-					Util.createCookie(request, response), source);
+					Util.createCookie(request, response), source, isCookieEnabled);
 			shortUrl = Util.qualifyShortUrl(request, shortUrl);
 			return shortUrl;
 		}

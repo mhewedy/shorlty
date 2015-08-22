@@ -17,6 +17,7 @@ public interface Columns {
 	String IP_COL = "ip";
 	String OWNER_ID_COL = "owner_id";
 	String SOURCE = "source";
+	String IS_COOKIE_ENABLED = "IS_COOKIE_ENABLED";
 
 	String HIT_COUNT_COL = "hitCount";
 	String URL_REL_COL = "urlObj";
