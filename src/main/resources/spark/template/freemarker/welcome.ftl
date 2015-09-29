@@ -88,6 +88,11 @@
 			<p>
 				${appname} is an open source URL <i>shorten</i>, <i>unshorten</i> and <i> tracker</i> website.
 			</p>
+			
+			<div class="alert alert-danger" role="alert">
+				<strong>
+				"Shortly" will shutdown in about 15 days</strong>, if you wish to keep it up, please email me at: mohammed_a_hewedy@hotmail.com, or send me a fb message at: http://fb.com/mhewedy
+			</div>
 
 			<div class="row marketing">
 				<div class="row">
@@ -127,7 +132,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<#if shorten_url?? || original_url??>
 				<div style="text-align: center;">
 					<h4><span class="label label-success">Success! Press CTRL+C to copy</span></h4>
@@ -137,7 +142,7 @@
 			<div class="fb-like" data-href="https://www.facebook.com/shortly.pw" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 
 		</div>
-
+		
 		<div class="alert alert-info" role="alert">
 			<strong>Heads up!</strong> You can put the URL that generated from any
 			service (ex. <strong>tinyurl.com</strong> or <strong>bitly.com</strong>) to see the original url before
